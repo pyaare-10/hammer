@@ -3,121 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>91 CLUB - Professional UI</title>
+    <title>91 CLUB - Professional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { margin: 0; padding: 0; background: #f7f8ff; font-family: Arial, sans-serif; }
+        :root { --red: #ff4d4d; --dark: #1f1f1f; --grey: #f5f5f5; --gold: #ffcc00; }
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #f8f8f8; color: #333; padding-bottom: 80px; }
 
-        /* Main Bottom Nav Styling */
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 65px;
-            background: #ffffff;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            z-index: 1000;
-        }
+        /* Top Header */
+        header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo { font-size: 20px; font-weight: 800; color: var(--red); }
+        .lang { font-size: 14px; font-weight: bold; }
 
-        .nav-item {
-            flex: 1;
-            text-align: center;
-            text-decoration: none;
-            color: #b5b5b5; /* Deactivated Color */
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
+        /* Banner Slider (Asli Jaisa) */
+        .banner-slider { width: 92%; height: 160px; margin: 15px auto; border-radius: 15px; background: linear-gradient(135deg, #ff4d4d, #c41c1c); display: flex; align-items: center; justify-content: center; color: white; text-align: center; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); }
 
-        .nav-item.active { color: #f95959; } /* Active Text Red */
-        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+        /* Category Grid */
+        .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; background: #fff; margin-top: 10px; }
+        .cat-item { text-align: center; font-size: 11px; font-weight: bold; color: #666; }
+        .cat-icon { width: 50px; height: 50px; background: #fff5f5; border-radius: 12px; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--red); border: 1px solid #fee2e2; }
 
-        /* CURVED CENTER BUTTON (Get 500 Texture) */
-        .center-menu {
-            position: relative;
-            width: 70px;
-            height: 100%; /* Parent Height */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            padding-bottom: 5px;
-        }
+        /* WinGo Game Box */
+        .wingo-box { background: white; margin: 15px; border-radius: 20px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .timer-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .timer-val { font-size: 32px; font-weight: bold; color: var(--red); font-family: monospace; }
 
-        .go-button {
-            position: absolute;
-            top: -30px; /* Neeche se upar nikla hua */
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, #ff9d5c 0%, #f95959 100%);
-            border: 5px solid #f7f8ff; /* Background se matching border */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(249, 89, 89, 0.4);
-            z-index: 1001;
-        }
+        /* Bet Buttons */
+        .bet-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .bet-btn { flex: 1; padding: 15px; border-radius: 10px; border: none; color: white; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .bg-g { background: #2ecc71; } .bg-v { background: #9b59b6; } .bg-r { background: #e74c3c; }
+        
+        .bs-row { display: flex; gap: 10px; }
+        .bs-btn { flex: 1; padding: 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 18px; color: white; }
+        .bg-big { background: #f39c12; } .bg-small { background: #3498db; }
 
-        .go-button img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-        }
+        /* Bottom Navbar (Premium) */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; z-index: 1000; }
+        .nav-link { color: #999; text-decoration: none; font-size: 11px; text-align: center; font-weight: bold; }
+        .nav-link.active { color: var(--red); }
+        .nav-link i { font-size: 20px; margin-bottom: 3px; }
+        .center-btn { background: var(--red); width: 55px; height: 55px; border-radius: 50%; margin-top: -35px; border: 5px solid #f8f8f8; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4); }
 
-        .go-text {
-            color: #f95959;
-            font-weight: bold;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        /* Go Button Animation (Optional) */
-        .go-button:active { transform: scale(0.9); transition: 0.1s; }
-
+        /* Notice Bar */
+        .notice { background: #fffbe6; padding: 8px; font-size: 12px; color: #d4a017; border-bottom: 1px solid #ffe58f; }
     </style>
 </head>
 <body>
 
-    <div style="padding: 20px; text-align: center; color: #999;">
-        <h1>91 CLUB CONTENT</h1>
-        <p>Aapka game yahan dikhega...</p>
+    <header>
+        <div class="logo">91 CLUB</div>
+        <div class="lang">🇮🇳 English</div>
+    </header>
+
+    <div class="notice">
+        <marquee>🔥 Member 91***546 won ₹50,000 on WinGo! | 💰 Daily Login Bonus Claim Now!</marquee>
     </div>
 
-    <div class="footer-nav">
-        <a href="#" class="nav-item active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-        
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span>Activity</span>
-        </a>
-
-        <div class="center-menu">
-            <div class="go-button">
-                <img src="https://img.icons8.com/color/96/prize-wheel.png" alt="GO">
-            </div>
-            <span class="go-text">Get 500</span>
+    <div class="banner-slider">
+        <div>
+            <h2 style="margin:0">WIN BIG TODAY</h2>
+            <p style="opacity:0.8; font-size:14px">Join 1,000,000+ Players Online</p>
         </div>
-
-        <a href="#" class="nav-link nav-item">
-            <i class="fa-solid fa-gift"></i>
-            <span>Promotion</span>
-        </a>
-
-        <a href="#" class="nav-link nav-item">
-            <i class="fa-solid fa-user-gear"></i>
-            <span>Account</span>
-        </a>
     </div>
 
+    <div class="cat-grid">
+        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-fire"></i></div>Lobby</div>
+        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-gamepad"></i></div>WinGo</div>
+        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-plane-up"></i></div>Aviator</div>
+        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-coins"></i></div>Slots</div>
+    </div>
+
+    <div class="wingo-box">
+        <div class="timer-row">
+            <div><strong>WinGo 1Min</strong><br><small style="color:#999">Period: 2024032345</small></div>
+            <div class="timer-val" id="timer">01:00</div>
+        </div>
+        <div class="bet-row">
+            <button class="bet-btn bg-g">Green</button>
+            <button class="bet-btn bg-v">Violet</button>
+            <button class="bet-btn bg-r">Red</button>
+        </div>
+        <div class="bs-row">
+            <button class="bs-btn bg-big">BIG</button>
+            <button class="bs-btn bg-small">SMALL</button>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i><br>Home</a>
+        <a href="#" class="nav-link"><i class="fa-solid fa-trophy"></i><br>Activity</a>
+        <div class="center-btn"><i class="fa-solid fa-gem"></i></div>
+        <a href="#" class="nav-link"><i class="fa-solid fa-wallet"></i><br>Wallet</a>
+        <a href="#" class="nav-link"><i class="fa-solid fa-user"></i><br>Account</a>
+    </div>
+
+    <script>
+        // Real-time Timer
+        let time = 60;
+        setInterval(() => {
+            time--;
+            if (time < 0) time = 60;
+            let m = Math.floor(time / 60);
+            let s = time % 60;
+            document.getElementById('timer').innerText = 
+                `0${m}:${s < 10 ? '0'+s : s}`;
+        }, 1000);
+    </script>
 </body>
 </html>
