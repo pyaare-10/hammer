@@ -3,162 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Indore 91 - Pro Gaming</title>
+    <title>INDORE 91 - Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --indore-red: #fb3e3e;
-            --indore-gold: #ffc845;
-            --dark-bg: #222731;
-            --card-bg: #2b323d;
-            --grey-text: #8a94a6;
+        :root { --main-red: #ff4d4d; --gold: #ffcc00; --dark: #1a1d23; --card: #242932; }
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Poppins', sans-serif; }
+
+        /* Header with Logo */
+        .header { background: var(--dark); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .logo { font-size: 22px; font-weight: bold; color: var(--gold); text-shadow: 0 0 10px rgba(255,204,0,0.3); }
+
+        /* Wallet Section - Making it 'Khas' */
+        .wallet-box {
+            background: linear-gradient(135deg, #ff4d4d 0%, #c41c1c 100%);
+            margin: 15px; border-radius: 20px; padding: 20px;
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.2);
+            position: relative; overflow: hidden;
         }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--dark-bg); color: white; overflow-x: hidden; padding-bottom: 80px; }
-
-        /* Header (Dark) */
-        .top-nav { background: var(--dark-bg); padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4655; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 22px; font-weight: 800; color: var(--indore-gold); letter-spacing: 1px; }
-        .lang { font-size: 14px; font-weight: bold; }
-
-        /* Wallet Box (Premium Look) */
-        .wallet-card { background: linear-gradient(135deg, #3a4452 0%, #222731 100%); margin: 15px; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #444; }
-        .balance-label { font-size: 13px; color: var(--grey-text); margin-bottom: 5px; }
-        .amount { font-size: 28px; font-weight: bold; color: var(--indore-gold); }
-        .action-btns { display: flex; gap: 12px; margin-top: 15px; }
-        .btn-act { flex: 1; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-dep { background: var(--indore-red); color: white; box-shadow: 0 4px 10px rgba(251,62,62,0.3); }
-        .btn-wit { background: #4a5568; color: white; }
-
-        /* Game Categories (Scrollable) */
-        .category-tabs { display: flex; overflow-x: auto; gap: 15px; padding: 10px 15px; background: #1e232b; scrollbar-width: none; }
-        .tab-item { text-align: center; min-width: 70px; font-size: 12px; color: #777; padding-bottom: 5px; cursor: pointer; }
-        .tab-item.active { color: var(--indore-gold); border-bottom: 2px solid var(--indore-gold); }
-
-        /* WinGo Banner Box */
-        .wingo-section { background: var(--card-bg); margin: 15px; border-radius: 15px; overflow: hidden; border: 1px solid #3d4655; }
-        .wingo-timer-bar { background: rgba(0,0,0,0.2); padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .time-left { font-size: 34px; font-weight: 900; color: var(--indore-red); letter-spacing: 2px; font-family: monospace; }
+        .wallet-box::after { content: 'VIP'; position: absolute; right: -10px; top: 10px; background: rgba(255,255,255,0.2); transform: rotate(45deg); padding: 5px 30px; font-size: 10px; }
         
-        /* Betting Area */
-        .bet-dashboard { padding: 15px; text-align: center; }
-        .color-btns { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 20px; }
-        .c-btn { flex: 1; padding: 15px; border-radius: 8px; border: none; color: white; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .green-bg { background: #15b364; } .violet-bg { background: #a458f6; } .red-bg { background: #f53d3d; }
+        .balance-title { font-size: 12px; opacity: 0.8; }
+        .balance-amt { font-size: 30px; font-weight: bold; margin: 5px 0; }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 12px; border-radius: 30px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-deposit { background: var(--gold); color: #000; }
+        .btn-withdraw { background: rgba(255,255,255,0.2); color: #fff; }
 
-        .number-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
-        .num-ball { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; cursor: pointer; background: white; transition: 0.2s; color: black; }
-        .num-ball:active { background: var(--main-red); color: white; }
+        /* Game Icons Grid - App Look */
+        .game-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
+        .game-item { text-align: center; font-size: 11px; color: #ccc; }
+        .icon-circle { 
+            width: 55px; height: 55px; background: var(--card); border-radius: 15px; 
+            margin: 0 auto 8px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; border: 1px solid #333; color: var(--gold);
+        }
 
-        .big-small-box { display: flex; gap: 15px; }
-        .bs-btn { flex: 1; padding: 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 18px; color: white; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .big-btn { background: #f39c12; }
-        .small-btn { background: #3498db; }
+        /* WinGo Live Area */
+        .wingo-card {
+            background: var(--card); margin: 15px; border-radius: 20px; padding: 20px;
+            border: 1px solid #333; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .timer-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .timer-clock { font-size: 35px; color: var(--main-red); font-weight: bold; font-family: 'Courier New', Courier, monospace; }
 
-        /* Game History Table */
-        .history-box { background: var(--card-bg); margin: 15px; border-radius: 15px; padding: 15px; border: 1px solid #3d4655; }
-        .history-header { display: grid; grid-template-columns: 2fr 1fr 1fr; color: #888; font-size: 12px; text-align: center; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #444; }
-        .history-row { display: grid; grid-template-columns: 2fr 1fr 1fr; text-align: center; padding: 10px 0; border-bottom: 1px solid #333; font-size: 14px; color: #ccc; }
-        .res-ball { width: 12px; height: 12px; display: inline-block; border-radius: 50%; }
+        /* Betting Buttons */
+        .bet-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .bet-btn { flex: 1; padding: 15px; border-radius: 10px; border: none; color: white; font-weight: bold; font-size: 16px; box-shadow: 0 4px 0 rgba(0,0,0,0.2); }
+        .bg-green { background: #2ecc71; } .bg-violet { background: #9b59b6; } .bg-red { background: #e74c3c; }
 
-        /* Bottom Menu */
-        .footer-nav { position: fixed; bottom: 0; width: 100%; background: #222731; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #3d4655; z-index: 1000; }
-        .nav-link { color: #666; text-decoration: none; font-size: 11px; text-align: center; }
-        .nav-link.active { color: var(--indore-gold); }
-        .center-btn { width: 50px; height: 50px; background: var(--indore-red); border-radius: 50%; margin-top: -30px; border: 4px solid #222731; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 10px rgba(251,62,62,0.4); }
-
-        /* Scrolling Notice */
-        .marquee-box { background: #1e232b; color: #ffc845; padding: 5px; font-size: 12px; border-bottom: 1px solid #3d4655; }
+        /* Bottom Navbar */
+        .bottom-nav {
+            position: fixed; bottom: 0; width: 100%; background: #1a1d23;
+            display: flex; justify-content: space-around; padding: 15px 0;
+            border-top: 1px solid #333;
+        }
+        .nav-link { color: #666; text-decoration: none; font-size: 12px; text-align: center; }
+        .nav-link.active { color: var(--main-red); }
+        .center-nav { 
+            width: 60px; height: 60px; background: var(--main-red); border-radius: 50%;
+            margin-top: -40px; border: 5px solid var(--dark); display: flex;
+            align-items: center; justify-content: center; font-size: 25px; color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+        }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
+    <div class="header">
         <div class="logo">INDORE 91</div>
-        <div class="lang">🇮🇳 EN</div>
+        <div onclick="window.location.href='admin.html'" style="cursor:pointer;"><i class="fa-solid fa-headset"></i></div>
     </div>
 
-    <div class="marquee-box">
-        <marquee>🔥 Member 98***621 just won ₹10,000 in Aviator! | 🚀 Register today for 100% Bonus!</marquee>
-    </div>
-
-    <div class="wallet-card">
-        <div class="balance-label">Total Balance</div>
-        <div class="amount">₹ 54,320.00 <span style="font-size: 18px; cursor: pointer; margin-left:10px;">🔄</span></div>
-        <div class="action-btns">
-            <button class="btn-act btn-dep">➕ Deposit</button>
-            <button class="btn-act btn-wit">💳 Withdraw</button>
+    <div class="wallet-box">
+        <div class="balance-title">Account Balance</div>
+        <div class="balance-amt">₹ 0.00</div>
+        <div class="btn-group">
+            <button class="btn btn-deposit">Deposit</button>
+            <button class="btn btn-withdraw">Withdraw</button>
         </div>
     </div>
 
-    <div class="category-tabs">
-        <div class="tab-item active">WinGo</div>
-        <div class="tab-item">Mini Game</div>
-        <div class="tab-item">K3</div>
-        <div class="tab-item">5D</div>
-        <div class="tab-item">Slots</div>
+    <div class="game-grid">
+        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-gamepad"></i></div>Lobby</div>
+        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-bolt"></i></div>Wingo</div>
+        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-plane-up"></i></div>Aviator</div>
+        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-coins"></i></div>Slots</div>
     </div>
 
-    <div class="wingo-section">
-        <div class="wingo-timer-bar">
-            <div><strong>WinGo 1Min</strong><br><small style="color:var(--grey-text)">Period: 2024032345</small></div>
-            <div class="time-left" id="timer">00:45</div>
+    <div class="wingo-card">
+        <div class="timer-row">
+            <div><strong style="font-size: 18px;">WinGo 1Min</strong><br><small style="color: #666;">Period: 20240323098</small></div>
+            <div class="timer-clock" id="timer">00:60</div>
+        </div>
+        
+        <div class="bet-row">
+            <button class="bet-btn bg-green">Green</button>
+            <button class="bet-btn bg-violet">Violet</button>
+            <button class="bet-btn bg-red">Red</button>
         </div>
 
-        <div class="bet-dashboard">
-            <div class="color-btns">
-                <button class="c-btn green-bg">Green</button>
-                <button class="c-btn violet-bg">Violet</button>
-                <button class="c-btn red-bg">Red</button>
-            </div>
-
-            <div class="number-grid">
-                <div class="num-ball" style="color:#f53d3d">0</div><div class="num-ball" style="color:#15b364">1</div>
-                <div class="num-ball" style="color:#f53d3d">2</div><div class="num-ball" style="color:#15b364">3</div>
-                <div class="num-ball" style="color:#f53d3d">4</div><div class="num-ball" style="color:#15b364">5</div>
-                <div class="num-ball" style="color:#f53d3d">6</div><div class="num-ball" style="color:#15b364">7</div>
-                <div class="num-ball" style="color:#f53d3d">8</div><div class="num-ball" style="color:#15b364">9</div>
-            </div>
-
-            <div class="big-small-box">
-                <button class="bs-btn big-btn">BIG</button>
-                <button class="bs-btn small-btn">SMALL</button>
-            </div>
+        <div style="display: flex; gap: 10px;">
+            <button style="flex:1; padding:15px; background:#f39c12; border:none; border-radius:10px; color:white; font-weight:bold;">BIG</button>
+            <button style="flex:1; padding:15px; background:#3498db; border:none; border-radius:10px; color:white; font-weight:bold;">SMALL</button>
         </div>
     </div>
 
-    <div class="history-box">
-        <div style="font-weight: bold; color: var(--indore-gold); margin-bottom: 10px; font-size: 16px;">Game History</div>
-        <div class="history-header">
-            <div>Period</div><div>Number</div><div>Result</div>
-        </div>
-        <div class="history-row">
-            <div>20240323044</div><div style="color: #f53d3d; font-weight: bold;">2</div>
-            <div><span class="res-ball" style="background: #f53d3d;"></span></div>
-        </div>
-        <div class="history-row">
-            <div>20240323043</div><div style="color: #15b364; font-weight: bold;">7</div>
-            <div><span class="res-ball" style="background: #15b364;"></span></div>
-        </div>
-        <div class="history-row">
-            <div>20240323042</div><div style="color: #a458f6; font-weight: bold;">5</div>
-            <div><span class="res-ball" style="background: linear-gradient(to right, #15b364 50%, #a458f6 50%);"></span></div>
-        </div>
-    </div>
-
-    <div class="footer-nav">
-        <a href="#" class="nav-link active">🏠<br>Home</a>
-        <a href="#" class="nav-link">📊<br>Activity</a>
-        <div class="center-btn">💎</div>
-        <a href="#" class="nav-link">💰<br>Wallet</a>
-        <a href="#" class="nav-link">👤<br>Account</a>
+    <div class="bottom-nav">
+        <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i><br>Home</a>
+        <a href="#" class="nav-link"><i class="fa-solid fa-trophy"></i><br>Activity</a>
+        <div class="center-nav"><i class="fa-solid fa-gem"></i></div>
+        <a href="#" class="nav-link"><i class="fa-solid fa-wallet"></i><br>Wallet</a>
+        <a href="#" class="nav-link"><i class="fa-solid fa-user"></i><br>Account</a>
     </div>
 
     <script>
-        let timeLeft = 60;
+        let time = 60;
         setInterval(() => {
-            timeLeft--;
-            if (timeLeft < 0) timeLeft = 60;
-            let s = timeLeft % 60;
-            document.getElementById('timer').innerText = `00:${s < 10 ? '0'+s : s}`;
+            time--;
+            if(time < 0) time = 60;
+            document.getElementById('timer').innerText = `00:${time < 10 ? '0'+time : time}`;
         }, 1000);
     </script>
 </body>
