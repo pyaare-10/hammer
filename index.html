@@ -3,100 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>91 CLUB - Pro</title>
+    <title>91 CLUB - Professional</title>
     <style>
-        :root { --red: #d91e1e; --grey: #f4f4f4; }
-        body { margin: 0; font-family: Arial; background: var(--grey); padding-bottom: 70px; }
+        :root { --main-red: #d91d1e; --bg-grey: #f7f8ff; }
+        body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg-grey); color: #333; padding-bottom: 80px; }
         
-        /* Header */
-        .header { background: white; padding: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px #ddd; }
-        .logo { color: var(--red); font-weight: bold; font-size: 20px; }
-        
-        /* WinGo Section */
-        .wingo-card { background: white; margin: 10px; border-radius: 15px; padding: 15px; text-align: center; border-top: 4px solid var(--red); }
-        .timer-box { display: flex; justify-content: space-around; align-items: center; background: #fff5f5; padding: 10px; border-radius: 10px; }
-        .timer { font-size: 24px; font-weight: bold; color: var(--red); }
-        
-        /* Betting Buttons */
-        .bet-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 15px 0; }
-        .btn { border: none; padding: 12px; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; }
-        .green { background: #28a745; } .violet { background: #6f42c1; } .red-btn { background: #dc3545; }
-        
-        .big-small { display: flex; gap: 10px; margin-top: 10px; }
-        .bs-btn { flex: 1; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        .big { background: #ffc107; color: black; }
-        .small { background: #17a2b8; color: white; }
+        /* Fixed Header */
+        .top-header { background: white; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo { font-size: 22px; font-weight: 900; color: var(--main-red); letter-spacing: -1px; }
+        .lang { font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
 
-        /* Number Grid */
-        .numbers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 15px; }
-        .num { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 50%; font-weight: bold; }
+        /* Wallet Section */
+        .wallet-card { background: white; margin: 15px; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .balance-label { font-size: 13px; color: #999; margin-bottom: 5px; }
+        .balance-amount { font-size: 28px; font-weight: bold; color: #333; display: flex; align-items: center; gap: 10px; }
+        .action-btns { display: flex; gap: 15px; margin-top: 15px; }
+        .act-btn { flex: 1; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .dep-btn { background: var(--main-red); color: white; }
+        .wit-btn { background: #fff; border: 1px solid #ddd; color: #666; }
 
-        /* Bottom Nav */
-        .nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; }
-        .nav-item { font-size: 12px; color: #666; text-align: center; cursor: pointer; }
-        .active { color: var(--red); }
+        /* WinGo Game Box */
+        .wingo-box { background: white; margin: 15px; border-radius: 20px; overflow: hidden; border-top: 5px solid var(--main-red); }
+        .wingo-header { background: #fff5f5; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .timer-display { font-size: 30px; font-weight: bold; color: var(--main-red); font-family: monospace; }
+        
+        .bet-area { padding: 20px; text-align: center; }
+        .color-btns { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 20px; }
+        .c-btn { flex: 1; padding: 15px; border-radius: 8px; border: none; color: white; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .g-bg { background: #2ecc71; } .v-bg { background: #9b59b6; } .r-bg { background: #e74c3c; }
+
+        .num-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+        .n-circle { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; cursor: pointer; background: white; transition: 0.2s; }
+        .n-circle:active { background: var(--main-red); color: white; }
+
+        .big-small-box { display: flex; gap: 15px; }
+        .bs-btn { flex: 1; padding: 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 18px; color: white; cursor: pointer; }
+        .big-btn { background: #f39c12; }
+        .small-btn { background: #3498db; }
+
+        /* Bottom Menu */
+        .footer-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; z-index: 1000; }
+        .f-item { text-align: center; font-size: 11px; color: #999; text-decoration: none; font-weight: bold; }
+        .f-item.active { color: var(--main-red); }
+        .f-center { background: var(--main-red); width: 55px; height: 55px; border-radius: 50%; margin-top: -35px; border: 5px solid var(--bg-grey); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 10px rgba(217,29,30,0.3); }
+
+        marquee { background: #fffbe6; color: #d4a017; padding: 5px; font-size: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="header">
+    <div class="top-header">
         <div class="logo">91 CLUB</div>
-        <div>🇮🇳 EN</div>
+        <div class="lang">🇮🇳 English</div>
     </div>
 
-    <div style="background: var(--red); height: 120px; margin: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-        WELCOME BONUS 100%
-    </div>
+    <marquee>🔥 User 91***546 just won ₹45,600 on WinGo 1Min! 🚀 Register today and get ₹100 instant bonus!</marquee>
 
-    <div class="wingo-card">
-        <div class="timer-box">
-            <div>WinGo 1Min<br><small>Period: 2024032301</small></div>
-            <div class="timer" id="timer">00:45</div>
-        </div>
-
-        <div class="bet-buttons">
-            <button class="btn green" onclick="bet('Green')">Green</button>
-            <button class="btn violet" onclick="bet('Violet')">Violet</button>
-            <button class="btn red-btn" onclick="bet('Red')">Red</button>
-        </div>
-
-        <div class="numbers">
-            <div class="num" style="color:red">0</div><div class="num" style="color:green">1</div>
-            <div class="num" style="color:red">2</div><div class="num" style="color:green">3</div>
-            <div class="num" style="color:red">4</div><div class="num" style="color:green">5</div>
-            <div class="num" style="color:red">6</div><div class="num" style="color:green">7</div>
-            <div class="num" style="color:red">8</div><div class="num" style="color:green">9</div>
-        </div>
-
-        <div class="big-small">
-            <button class="bs-btn big" onclick="bet('Big')">BIG</button>
-            <button class="bs-btn small" onclick="bet('Small')">SMALL</button>
+    <div class="wallet-card">
+        <div class="balance-label">Total Balance</div>
+        <div class="balance-amount">₹ 5,420.00 <span style="font-size: 18px; cursor: pointer;">🔄</span></div>
+        <div class="action-btns">
+            <button class="act-btn dep-btn">➕ Deposit</button>
+            <button class="act-btn wit-btn">💳 Withdraw</button>
         </div>
     </div>
 
-    <div class="nav">
-        <div class="nav-item active">🏠<br>Home</div>
-        <div class="nav-item">📊<br>Activity</div>
-        <div class="nav-item" style="background:var(--red); color:white; width:40px; height:40px; border-radius:50%; line-height:40px;">💎</div>
-        <div class="nav-item">💰<br>Wallet</div>
-        <div class="nav-item">👤<br>Account</div>
+    <div class="wingo-box">
+        <div class="wingo-header">
+            <div><strong>WinGo 1Min</strong><br><small style="color:#999">Period: 2024032345</small></div>
+            <div class="timer-display" id="timer">00:45</div>
+        </div>
+
+        <div class="bet-area">
+            <div class="color-btns">
+                <button class="c-btn g-bg">Green</button>
+                <button class="c-btn v-bg">Violet</button>
+                <button class="c-btn r-bg">Red</button>
+            </div>
+
+            <div class="num-grid">
+                <div class="n-circle" style="color:#e74c3c">0</div><div class="n-circle" style="color:#2ecc71">1</div>
+                <div class="n-circle" style="color:#e74c3c">2</div><div class="n-circle" style="color:#2ecc71">3</div>
+                <div class="n-circle" style="color:#e74c3c">4</div><div class="n-circle" style="color:#2ecc71">5</div>
+                <div class="n-circle" style="color:#e74c3c">6</div><div class="n-circle" style="color:#2ecc71">7</div>
+                <div class="n-circle" style="color:#e74c3c">8</div><div class="n-circle" style="color:#2ecc71">9</div>
+            </div>
+
+            <div class="big-small-box">
+                <button class="bs-btn big-btn">BIG</button>
+                <button class="bs-btn small-btn">SMALL</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#" class="f-item active">🏠<br>Home</a>
+        <a href="#" class="f-item">📊<br>Activity</a>
+        <div class="f-center">💎</div>
+        <a href="#" class="f-item">💰<br>Wallet</a>
+        <a href="#" class="f-item">👤<br>Account</a>
     </div>
 
     <script>
-        // Real-time Timer Logic
-        let time = 60;
+        // Smooth Timer Logic
+        let timeLeft = 60;
+        const timerEl = document.getElementById('timer');
         setInterval(() => {
-            time--;
-            if(time < 0) time = 60;
-            let mins = Math.floor(time / 60);
-            let secs = time % 60;
-            document.getElementById('timer').innerHTML = 
-                `0${mins}:${secs < 10 ? '0'+secs : secs}`;
+            timeLeft--;
+            if (timeLeft < 0) timeLeft = 60;
+            let m = Math.floor(timeLeft / 60);
+            let s = timeLeft % 60;
+            timerEl.innerText = `0${m}:${s < 10 ? '0' + s : s}`;
         }, 1000);
-
-        function bet(type) {
-            alert("Aapne " + type + " par bet lagayi hai!");
-        }
     </script>
+
 </body>
 </html>
