@@ -3,127 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>INDORE 91 - Premium</title>
+    <title>91 CLUB - Professional UI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-red: #ff4d4d; --gold: #ffcc00; --dark: #1a1d23; --card: #242932; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Poppins', sans-serif; }
+        body { margin: 0; padding: 0; background: #f7f8ff; font-family: Arial, sans-serif; }
 
-        /* Header with Logo */
-        .header { background: var(--dark); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
-        .logo { font-size: 22px; font-weight: bold; color: var(--gold); text-shadow: 0 0 10px rgba(255,204,0,0.3); }
-
-        /* Wallet Section - Making it 'Khas' */
-        .wallet-box {
-            background: linear-gradient(135deg, #ff4d4d 0%, #c41c1c 100%);
-            margin: 15px; border-radius: 20px; padding: 20px;
-            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.2);
-            position: relative; overflow: hidden;
-        }
-        .wallet-box::after { content: 'VIP'; position: absolute; right: -10px; top: 10px; background: rgba(255,255,255,0.2); transform: rotate(45deg); padding: 5px 30px; font-size: 10px; }
-        
-        .balance-title { font-size: 12px; opacity: 0.8; }
-        .balance-amt { font-size: 30px; font-weight: bold; margin: 5px 0; }
-        
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        .btn { flex: 1; padding: 12px; border-radius: 30px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-deposit { background: var(--gold); color: #000; }
-        .btn-withdraw { background: rgba(255,255,255,0.2); color: #fff; }
-
-        /* Game Icons Grid - App Look */
-        .game-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
-        .game-item { text-align: center; font-size: 11px; color: #ccc; }
-        .icon-circle { 
-            width: 55px; height: 55px; background: var(--card); border-radius: 15px; 
-            margin: 0 auto 8px; display: flex; align-items: center; justify-content: center;
-            font-size: 24px; border: 1px solid #333; color: var(--gold);
+        /* Main Bottom Nav Styling */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 65px;
+            background: #ffffff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
         }
 
-        /* WinGo Live Area */
-        .wingo-card {
-            background: var(--card); margin: 15px; border-radius: 20px; padding: 20px;
-            border: 1px solid #333; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            color: #b5b5b5; /* Deactivated Color */
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
         }
-        .timer-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .timer-clock { font-size: 35px; color: var(--main-red); font-weight: bold; font-family: 'Courier New', Courier, monospace; }
 
-        /* Betting Buttons */
-        .bet-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .bet-btn { flex: 1; padding: 15px; border-radius: 10px; border: none; color: white; font-weight: bold; font-size: 16px; box-shadow: 0 4px 0 rgba(0,0,0,0.2); }
-        .bg-green { background: #2ecc71; } .bg-violet { background: #9b59b6; } .bg-red { background: #e74c3c; }
+        .nav-item.active { color: #f95959; } /* Active Text Red */
+        .nav-item i { font-size: 20px; margin-bottom: 4px; }
 
-        /* Bottom Navbar */
-        .bottom-nav {
-            position: fixed; bottom: 0; width: 100%; background: #1a1d23;
-            display: flex; justify-content: space-around; padding: 15px 0;
-            border-top: 1px solid #333;
+        /* CURVED CENTER BUTTON (Get 500 Texture) */
+        .center-menu {
+            position: relative;
+            width: 70px;
+            height: 100%; /* Parent Height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 5px;
         }
-        .nav-link { color: #666; text-decoration: none; font-size: 12px; text-align: center; }
-        .nav-link.active { color: var(--main-red); }
-        .center-nav { 
-            width: 60px; height: 60px; background: var(--main-red); border-radius: 50%;
-            margin-top: -40px; border: 5px solid var(--dark); display: flex;
-            align-items: center; justify-content: center; font-size: 25px; color: white;
-            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+
+        .go-button {
+            position: absolute;
+            top: -30px; /* Neeche se upar nikla hua */
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff9d5c 0%, #f95959 100%);
+            border: 5px solid #f7f8ff; /* Background se matching border */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(249, 89, 89, 0.4);
+            z-index: 1001;
         }
+
+        .go-button img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .go-text {
+            color: #f95959;
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Go Button Animation (Optional) */
+        .go-button:active { transform: scale(0.9); transition: 0.1s; }
+
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo">INDORE 91</div>
-        <div onclick="window.location.href='admin.html'" style="cursor:pointer;"><i class="fa-solid fa-headset"></i></div>
+    <div style="padding: 20px; text-align: center; color: #999;">
+        <h1>91 CLUB CONTENT</h1>
+        <p>Aapka game yahan dikhega...</p>
     </div>
 
-    <div class="wallet-box">
-        <div class="balance-title">Account Balance</div>
-        <div class="balance-amt">₹ 0.00</div>
-        <div class="btn-group">
-            <button class="btn btn-deposit">Deposit</button>
-            <button class="btn btn-withdraw">Withdraw</button>
-        </div>
-    </div>
-
-    <div class="game-grid">
-        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-gamepad"></i></div>Lobby</div>
-        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-bolt"></i></div>Wingo</div>
-        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-plane-up"></i></div>Aviator</div>
-        <div class="game-item"><div class="icon-circle"><i class="fa-solid fa-coins"></i></div>Slots</div>
-    </div>
-
-    <div class="wingo-card">
-        <div class="timer-row">
-            <div><strong style="font-size: 18px;">WinGo 1Min</strong><br><small style="color: #666;">Period: 20240323098</small></div>
-            <div class="timer-clock" id="timer">00:60</div>
-        </div>
+    <div class="footer-nav">
+        <a href="#" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
         
-        <div class="bet-row">
-            <button class="bet-btn bg-green">Green</button>
-            <button class="bet-btn bg-violet">Violet</button>
-            <button class="bet-btn bg-red">Red</button>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Activity</span>
+        </a>
+
+        <div class="center-menu">
+            <div class="go-button">
+                <img src="https://img.icons8.com/color/96/prize-wheel.png" alt="GO">
+            </div>
+            <span class="go-text">Get 500</span>
         </div>
 
-        <div style="display: flex; gap: 10px;">
-            <button style="flex:1; padding:15px; background:#f39c12; border:none; border-radius:10px; color:white; font-weight:bold;">BIG</button>
-            <button style="flex:1; padding:15px; background:#3498db; border:none; border-radius:10px; color:white; font-weight:bold;">SMALL</button>
-        </div>
+        <a href="#" class="nav-link nav-item">
+            <i class="fa-solid fa-gift"></i>
+            <span>Promotion</span>
+        </a>
+
+        <a href="#" class="nav-link nav-item">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Account</span>
+        </a>
     </div>
 
-    <div class="bottom-nav">
-        <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i><br>Home</a>
-        <a href="#" class="nav-link"><i class="fa-solid fa-trophy"></i><br>Activity</a>
-        <div class="center-nav"><i class="fa-solid fa-gem"></i></div>
-        <a href="#" class="nav-link"><i class="fa-solid fa-wallet"></i><br>Wallet</a>
-        <a href="#" class="nav-link"><i class="fa-solid fa-user"></i><br>Account</a>
-    </div>
-
-    <script>
-        let time = 60;
-        setInterval(() => {
-            time--;
-            if(time < 0) time = 60;
-            document.getElementById('timer').innerText = `00:${time < 10 ? '0'+time : time}`;
-        }, 1000);
-    </script>
 </body>
 </html>
