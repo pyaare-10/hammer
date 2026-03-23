@@ -17,24 +17,25 @@
             overflow: hidden; height: 100vh;
         }
 
+        /* New Authentication Verified Badge Look */
+        #auth-badge {
+            position: fixed; top: 85px; right: -300px;
+            background: linear-gradient(135deg, #2e7d32, #4ade80);
+            color: white; padding: 12px 25px; border-radius: 50px 0 0 50px;
+            font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+            box-shadow: -10px 0 20px rgba(46, 222, 128, 0.2);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000; display: flex; align-items: center; gap: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        #auth-badge.slide-in { transform: translateX(-300px); }
+
         .top-bar {
             padding: 20px; background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(15px); display: flex; justify-content: space-between;
             align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .logo { font-weight: 800; font-size: 16px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
-
-        /* Sliding Badge Animation */
-        #auth-badge {
-            position: fixed; top: 90px; right: -280px;
-            background: var(--emerald); color: white;
-            padding: 10px 20px; border-radius: 30px 0 0 30px;
-            font-size: 12px; font-weight: bold; letter-spacing: 1px;
-            box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 100; display: flex; align-items: center; gap: 8px;
-        }
-        #auth-badge.slide-in { transform: translateX(-280px); }
 
         .container { 
             position: relative; width: 100%; height: calc(100vh - 80px);
@@ -52,8 +53,8 @@
 
         .ticket-badge {
             position: absolute; top: 12px; left: 15px;
-            background: rgba(46, 125, 50, 0.2); border: 1px solid #4ade80;
-            color: #4ade80; padding: 3px 10px; border-radius: 6px;
+            background: rgba(46, 125, 50, 0.3); border: 1px solid #4ade80;
+            color: #4ade80; padding: 4px 12px; border-radius: 8px;
             font-size: 10px; font-weight: 700;
         }
 
@@ -65,12 +66,13 @@
         label { font-size: 10px; color: #94a3b8; display: block; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
         
         .animated-input {
-            width: 100%; background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.1);
-            padding: 12px; border-radius: 12px; color: white; font-size: 16px; outline: none;
+            width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px; border-radius: 12px; color: white; font-size: 16px; outline: none;
             box-sizing: border-box; transition: 0.3s;
         }
+        .animated-input:focus { border-color: var(--gold); background: rgba(255,179,0,0.05); }
         
-        .glow-box { animation: borderPulse 2s infinite; font-size: 24px; letter-spacing: 6px; text-align: center; }
+        .glow-box { animation: borderPulse 2s infinite; font-size: 24px; letter-spacing: 6px; text-align: center; border-width: 2px; }
         
         @keyframes borderPulse {
             0% { border-color: rgba(255, 179, 0, 0.2); box-shadow: 0 0 5px rgba(255, 179, 0, 0.1); }
@@ -81,7 +83,7 @@
         .btn-main {
             width: 100%; background: linear-gradient(135deg, #ffb300, #ff8f00);
             color: #000; border: none; padding: 18px; border-radius: 15px;
-            font-weight: 800; font-size: 14px; cursor: pointer; text-transform: uppercase;
+            font-weight: 800; font-size: 14px; cursor: pointer; text-transform: uppercase; margin-top: 10px;
         }
 
         #loader { display: none; text-align: center; margin-top: 15px; }
@@ -94,22 +96,24 @@
 <body>
 
     <div id="auth-badge">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <div style="background: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#2e7d32"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        </div>
         AUTHENTICATION VERIFIED
     </div>
 
     <div class="top-bar">
         <div class="logo">NAGALAND STATE LOTTERY</div>
-        <div style="font-size: 10px; color: #4ade80;">● SECURE</div>
+        <div style="font-size: 10px; color: #4ade80; font-weight: bold;">● SECURE SERVER</div>
     </div>
 
     <div class="container">
         <div class="card active-view" id="step1">
             <h2 style="margin: 0 0 5px; font-weight: 800; text-align: center;">Ticket Check</h2>
-            <p style="color: #64748b; font-size: 13px; text-align: center; margin-bottom: 25px;">Official Ticket Verification Portal</p>
+            <p style="color: #64748b; font-size: 13px; text-align: center; margin-bottom: 25px;">Enter your 5-digit ticket number</p>
             
             <div class="input-group">
-                <label>Ticket Number (5 Digits)</label>
+                <label>Ticket ID</label>
                 <input type="number" id="ticket-id" class="animated-input glow-box" placeholder="00000" oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5)">
             </div>
 
@@ -117,22 +121,22 @@
 
             <div id="loader">
                 <div class="spinner"></div>
-                <p style="font-size: 10px; color: var(--gold); margin-top: 10px;">CONNECTING TO SERVER...</p>
+                <p style="font-size: 10px; color: var(--gold); margin-top: 10px;">AUTHENTICATING...</p>
             </div>
         </div>
 
         <div class="card hidden-right" id="step2">
             <div class="ticket-badge" id="display-ticket">#00000</div>
             <h2 style="margin: 15px 0 5px; font-weight: 800; text-align: center; font-size: 24px;">Registration</h2>
-            <p style="color: #64748b; font-size: 12px; text-align: center; margin-bottom: 15px;">Enter Customer Details</p>
+            <p style="color: #64748b; font-size: 12px; text-align: center; margin-bottom: 20px;">Enter Customer Details</p>
             
             <div class="input-group">
                 <label>First Name</label>
-                <input type="text" id="fname" class="animated-input" placeholder="First Name">
+                <input type="text" id="fname" class="animated-input" placeholder="e.g. Rahul">
             </div>
             <div class="input-group">
                 <label>Last Name</label>
-                <input type="text" id="lname" class="animated-input" placeholder="Last Name">
+                <input type="text" id="lname" class="animated-input" placeholder="e.g. Sharma">
             </div>
             <div class="input-group">
                 <label>Mobile Number</label>
@@ -166,7 +170,15 @@
             document.getElementById('loader').style.display = 'block';
 
             setTimeout(() => {
-                document.getElementById('auth-badge').classList.add('slide-in');
+                // Show badge
+                const badge = document.getElementById('auth-badge');
+                badge.classList.add('slide-in');
+                
+                // Hide badge after 3 seconds
+                setTimeout(() => {
+                    badge.classList.remove('slide-in');
+                }, 3000);
+
                 document.getElementById('display-ticket').innerText = "TICKET: #" + ticketNum;
 
                 setTimeout(() => {
@@ -182,7 +194,7 @@
             const ln = document.getElementById('lname').value;
             const mb = document.getElementById('mobile').value;
             if(!fn || !ln || !mb) { alert("Please fill all details"); return; }
-            if(mb.length < 10) { alert("Please enter valid 10 digit mobile number"); return; }
+            if(mb.length < 10) { alert("Enter valid 10-digit mobile"); return; }
 
             document.getElementById('display-ticket-final').innerText = "TICKET: #" + ticketNum;
             document.getElementById('step2').className = "card hidden-left";
