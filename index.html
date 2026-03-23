@@ -1,72 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Lucky Draw Pro</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #000, #222);
-      color: white;
-      text-align: center;
-    }
-    .box {
-      margin-top: 100px;
-    }
-    h1 {
-      color: gold;
-    }
-    input {
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      width: 200px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      background: gold;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-    #result {
-      margin-top: 20px;
-      font-size: 22px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDORE 91 - Pro Gaming</title>
+    <style>
+        /* Basic Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a; /* Dark Background */
+            color: white;
+        }
+
+        /* Header / Navbar */
+        header {
+            background: #2d2d2d;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ffcc00;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-transform: uppercase;
+        }
+
+        /* Banner Section */
+        .banner {
+            width: 95%;
+            height: 180px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/800x400'); /* Yahan apna banner image dalen */
+            background-size: cover;
+            background-position: center;
+            margin: 15px auto;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #444;
+        }
+
+        /* Grid Layout for Games */
+        .container {
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 Columns like mobile apps */
+            gap: 10px;
+        }
+
+        .card {
+            background: #2d2d2d;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #3d3d3d;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #ffcc00;
+            transform: translateY(-5px);
+        }
+
+        .card i {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Buttons */
+        .btn-main {
+            background: #ffcc00;
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 90%;
+            margin: 20px auto;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        /* Bottom Navigation Bar (Mobile Style) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #222;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #444;
+        }
+
+        .nav-item {
+            font-size: 12px;
+            color: #888;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .nav-item.active {
+            color: #ffcc00;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="box">
-    <h1>🎰 Lucky Draw</h1>
-    <p>Try your luck now!</p>
+    <header>
+        <div class="logo">INDORE 91</div>
+    </header>
 
-    <input type="text" id="name" placeholder="Enter your name"><br>
-    <button onclick="play()">Play Now</button>
+    <div class="banner">
+        <h2>BIG WIN JACKPOT!</h2>
+    </div>
 
-    <div id="result"></div>
-  </div>
+    <div class="container">
+        <div class="card">🎰<br>Casino</div>
+        <div class="card">⚽<br>Sports</div>
+        <div class="card">🃏<br>Rummy</div>
+        <div class="card">🎡<br>Slots</div>
+        <div class="card">💎<br>VIP</div>
+        <div class="card">🎁<br>Promos</div>
+    </div>
 
-  <script>
-    function play() {
-      let name = document.getElementById("name").value;
-      let num = Math.floor(Math.random() * 10);
+    <a href="#" class="btn-main">LOGIN / REGISTER</a>
 
-      if(name === "") {
-        alert("Enter your name!");
-        return;
-      }
-
-      if(num > 5) {
-        document.getElementById("result").innerHTML =
-        "🎉 Congrats " + name + ", You Won!";
-      } else {
-        document.getElementById("result").innerHTML =
-        "😢 Sorry " + name + ", Try Again!";
-      }
-    }
-  </script>
+    <div style="height: 70px;"></div> <div class="bottom-nav">
+        <a href="#" class="nav-item active">🏠<br>Home</a>
+        <a href="#" class="nav-item">📊<br>Activity</a>
+        <a href="#" class="nav-item">💰<br>Wallet</a>
+        <a href="#" class="nav-item">👤<br>Account</a>
+    </div>
 
 </body>
 </html>
