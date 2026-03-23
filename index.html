@@ -3,110 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>91 CLUB - Professional</title>
+    <title>Dear Lottery - 91 Style</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --red: #ff4d4d; --dark: #1f1f1f; --grey: #f5f5f5; --gold: #ffcc00; }
-        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #f8f8f8; color: #333; padding-bottom: 80px; }
+        :root { --nagaland-green: #1b5e20; --nagaland-orange: #ff9800; --dark: #121212; }
+        body { margin: 0; background: #f0f3f5; font-family: 'Poppins', sans-serif; padding-bottom: 80px; }
 
-        /* Top Header */
-        header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .logo { font-size: 20px; font-weight: 800; color: var(--red); }
-        .lang { font-size: 14px; font-weight: bold; }
+        /* Header */
+        .header { background: var(--nagaland-green); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 900; letter-spacing: 1px; }
 
-        /* Banner Slider (Asli Jaisa) */
-        .banner-slider { width: 92%; height: 160px; margin: 15px auto; border-radius: 15px; background: linear-gradient(135deg, #ff4d4d, #c41c1c); display: flex; align-items: center; justify-content: center; color: white; text-align: center; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); }
+        /* Lottery Ticket Banner */
+        .ticket-banner {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            margin: 15px; border-radius: 15px; padding: 20px; color: white;
+            box-shadow: 0 5px 15px rgba(255,152,0,0.4); text-align: center;
+            border: 2px dashed rgba(255,255,255,0.5);
+        }
+        .prize { font-size: 32px; font-weight: bold; margin: 10px 0; }
 
-        /* Category Grid */
-        .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; background: #fff; margin-top: 10px; }
-        .cat-item { text-align: center; font-size: 11px; font-weight: bold; color: #666; }
-        .cat-icon { width: 50px; height: 50px; background: #fff5f5; border-radius: 12px; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--red); border: 1px solid #fee2e2; }
+        /* Timing Tabs */
+        .draw-times { display: flex; justify-content: space-around; background: white; padding: 10px 0; margin-bottom: 10px; }
+        .time-box { text-align: center; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; color: #666; }
+        .time-box.active { background: var(--nagaland-green); color: white; }
 
-        /* WinGo Game Box */
-        .wingo-box { background: white; margin: 15px; border-radius: 20px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .timer-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .timer-val { font-size: 32px; font-weight: bold; color: var(--red); font-family: monospace; }
+        /* Buy Ticket Section */
+        .buy-section { background: white; margin: 15px; border-radius: 15px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .ticket-input { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 10px; font-size: 18px; text-align: center; margin-bottom: 15px; box-sizing: border-box; }
+        .buy-btn { width: 100%; padding: 15px; background: var(--nagaland-green); color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; }
 
-        /* Bet Buttons */
-        .bet-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .bet-btn { flex: 1; padding: 15px; border-radius: 10px; border: none; color: white; font-weight: bold; font-size: 16px; cursor: pointer; }
-        .bg-g { background: #2ecc71; } .bg-v { background: #9b59b6; } .bg-r { background: #e74c3c; }
-        
-        .bs-row { display: flex; gap: 10px; }
-        .bs-btn { flex: 1; padding: 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 18px; color: white; }
-        .bg-big { background: #f39c12; } .bg-small { background: #3498db; }
+        /* Result Table */
+        .result-table { background: white; margin: 15px; border-radius: 15px; padding: 15px; }
+        .res-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px; font-weight: bold; color: #333; }
+        .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f9f9f9; font-size: 14px; }
+        .win-tag { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 5px; font-size: 11px; font-weight: bold; }
 
-        /* Bottom Navbar (Premium) */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; z-index: 1000; }
-        .nav-link { color: #999; text-decoration: none; font-size: 11px; text-align: center; font-weight: bold; }
-        .nav-link.active { color: var(--red); }
-        .nav-link i { font-size: 20px; margin-bottom: 3px; }
-        .center-btn { background: var(--red); width: 55px; height: 55px; border-radius: 50%; margin-top: -35px; border: 5px solid #f8f8f8; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4); }
-
-        /* Notice Bar */
-        .notice { background: #fffbe6; padding: 8px; font-size: 12px; color: #d4a017; border-bottom: 1px solid #ffe58f; }
+        /* Navigation */
+        .nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; }
+        .nav-item { color: #999; text-decoration: none; font-size: 11px; text-align: center; }
+        .nav-item.active { color: var(--nagaland-green); }
+        .center-circle { width: 55px; height: 55px; background: var(--nagaland-orange); border-radius: 50%; margin-top: -35px; border: 5px solid #f0f3f5; color: white; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">91 CLUB</div>
-        <div class="lang">🇮🇳 English</div>
-    </header>
-
-    <div class="notice">
-        <marquee>🔥 Member 91***546 won ₹50,000 on WinGo! | 💰 Daily Login Bonus Claim Now!</marquee>
+    <div class="header">
+        <div class="logo">DEAR LOTTERY</div>
+        <div onclick="window.location.href='https://t.me/YOUR_ID'"><i class="fa-solid fa-user-circle"></i></div>
     </div>
 
-    <div class="banner-slider">
-        <div>
-            <h2 style="margin:0">WIN BIG TODAY</h2>
-            <p style="opacity:0.8; font-size:14px">Join 1,000,000+ Players Online</p>
+    <div class="ticket-banner">
+        <div style="font-size: 14px;">NAGALAND STATE LOTTERY</div>
+        <div class="prize">₹ 1,00,00,000</div>
+        <div style="font-weight: bold;">1st PRIZE WINNER</div>
+    </div>
+
+    <div class="draw-times">
+        <div class="time-box active">1:00 PM<br>Morning</div>
+        <div class="time-box">6:00 PM<br>Day</div>
+        <div class="time-box">8:00 PM<br>Evening</div>
+    </div>
+
+    <div class="buy-section">
+        <div style="margin-bottom: 10px; font-weight: bold; color: #555;">Enter Ticket Number (5 Digits)</div>
+        <input type="number" class="ticket-input" placeholder="8 4 5 2 1">
+        <button class="buy-btn" onclick="buyTicket()">BUY TICKET ₹6</button>
+    </div>
+
+    <div class="result-table">
+        <div class="res-header">
+            <span>Recent Winners</span>
+            <span style="color: var(--nagaland-orange);">Today</span>
+        </div>
+        <div class="res-row">
+            <span>Ticket: 45J-8921</span>
+            <span class="win-tag">WON ₹1Cr</span>
+        </div>
+        <div class="res-row">
+            <span>Ticket: 12B-4432</span>
+            <span class="win-tag">WON ₹9000</span>
+        </div>
+        <div class="res-row">
+            <span>Ticket: 88K-1090</span>
+            <span class="win-tag">WON ₹2000</span>
         </div>
     </div>
 
-    <div class="cat-grid">
-        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-fire"></i></div>Lobby</div>
-        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-gamepad"></i></div>WinGo</div>
-        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-plane-up"></i></div>Aviator</div>
-        <div class="cat-item"><div class="cat-icon"><i class="fa-solid fa-coins"></i></div>Slots</div>
-    </div>
-
-    <div class="wingo-box">
-        <div class="timer-row">
-            <div><strong>WinGo 1Min</strong><br><small style="color:#999">Period: 2024032345</small></div>
-            <div class="timer-val" id="timer">01:00</div>
-        </div>
-        <div class="bet-row">
-            <button class="bet-btn bg-g">Green</button>
-            <button class="bet-btn bg-v">Violet</button>
-            <button class="bet-btn bg-r">Red</button>
-        </div>
-        <div class="bs-row">
-            <button class="bs-btn bg-big">BIG</button>
-            <button class="bs-btn bg-small">SMALL</button>
-        </div>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i><br>Home</a>
-        <a href="#" class="nav-link"><i class="fa-solid fa-trophy"></i><br>Activity</a>
-        <div class="center-btn"><i class="fa-solid fa-gem"></i></div>
+    <div class="nav">
+        <a href="#" class="nav-item active"><i class="fa-solid fa-ticket"></i><br>Tickets</a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-chart-line"></i><br>Results</a>
+        <div class="center-circle"><i class="fa-solid fa-trophy"></i></div>
         <a href="#" class="nav-link"><i class="fa-solid fa-wallet"></i><br>Wallet</a>
-        <a href="#" class="nav-link"><i class="fa-solid fa-user"></i><br>Account</a>
+        <a href="https://t.me/YOUR_ID" class="nav-item"><i class="fa-solid fa-user"></i><br>Profile</a>
     </div>
 
     <script>
-        // Real-time Timer
-        let time = 60;
-        setInterval(() => {
-            time--;
-            if (time < 0) time = 60;
-            let m = Math.floor(time / 60);
-            let s = time % 60;
-            document.getElementById('timer').innerText = 
-                `0${m}:${s < 10 ? '0'+s : s}`;
-        }, 1000);
+        function buyTicket() {
+            let num = document.querySelector('.ticket-input').value;
+            if(num.length == 5) {
+                alert("Ticket #" + num + " successfully purchased! Wait for 1PM Draw.");
+                window.location.href = "https://t.me/YOUR_ID?text=Sir_Ticket_Buy_Kar_Liya_Number_" + num;
+            } else {
+                alert("Please enter a valid 5 digit number.");
+            }
+        }
     </script>
 </body>
 </html>
