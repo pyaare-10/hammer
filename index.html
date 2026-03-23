@@ -24,9 +24,9 @@
         }
         .logo { font-weight: 800; font-size: 16px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
 
-        /* Verification Badge - Slides in from Right */
+        /* Sliding Badge from Red Marked Area */
         #auth-badge {
-            position: fixed; top: 90px; right: -250px; /* Hidden off-screen initially */
+            position: fixed; top: 90px; right: -280px;
             background: var(--emerald); color: white;
             padding: 10px 20px; border-radius: 30px 0 0 30px;
             font-size: 12px; font-weight: bold; letter-spacing: 1px;
@@ -34,7 +34,7 @@
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 100; display: flex; align-items: center; gap: 8px;
         }
-        #auth-badge.slide-in { transform: translateX(-250px); } /* Moves into view */
+        #auth-badge.slide-in { transform: translateX(-280px); }
 
         .container { 
             position: relative; width: 100%; height: calc(100vh - 80px);
@@ -50,7 +50,6 @@
             box-sizing: border-box;
         }
 
-        /* Ticket Badge (Inside Card) */
         .ticket-badge {
             position: absolute; top: 12px; left: 15px;
             background: rgba(46, 125, 50, 0.2); border: 1px solid #4ade80;
@@ -124,7 +123,8 @@
 
         <div class="card hidden-right" id="step2">
             <div class="ticket-badge" id="display-ticket">#00000</div>
-            <h2 style="margin: 15px 0 25px; font-weight: 800; text-align: center; font-size: 24px;">Registration</h2>
+            <h2 style="margin: 15px 0 5px; font-weight: 800; text-align: center; font-size: 24px;">Registration</h2>
+            <p style="color: #64748b; font-size: 12px; text-align: center; margin-bottom: 20px;">Enter Customer Details</p>
             
             <div class="input-group">
                 <label>First Name</label>
@@ -162,12 +162,9 @@
             document.getElementById('loader').style.display = 'block';
 
             setTimeout(() => {
-                // 1. Show the sliding badge from the red-marked area
                 document.getElementById('auth-badge').classList.add('slide-in');
-                
                 document.getElementById('display-ticket').innerText = "TICKET: #" + ticketNum;
 
-                // 2. Delay the card transition slightly for better effect
                 setTimeout(() => {
                     document.getElementById('step1').className = "card hidden-left";
                     document.getElementById('step2').className = "card active-view";
