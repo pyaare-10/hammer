@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lucky Draw Pro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #000, #222);
+      color: white;
+      text-align: center;
+    }
+    .box {
+      margin-top: 100px;
+    }
+    h1 {
+      color: gold;
+    }
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: gold;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 22px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>🎰 Lucky Draw</h1>
+    <p>Try your luck now!</p>
+
+    <input type="text" id="name" placeholder="Enter your name"><br>
+    <button onclick="play()">Play Now</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function play() {
+      let name = document.getElementById("name").value;
+      let num = Math.floor(Math.random() * 10);
+
+      if(name === "") {
+        alert("Enter your name!");
+        return;
+      }
+
+      if(num > 5) {
+        document.getElementById("result").innerHTML =
+        "🎉 Congrats " + name + ", You Won!";
+      } else {
+        document.getElementById("result").innerHTML =
+        "😢 Sorry " + name + ", Try Again!";
+      }
+    }
+  </script>
+
+</body>
+</html>
