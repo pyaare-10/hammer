@@ -3,177 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDORE 91 - VIP Gaming</title>
+    <title>91 CLUB - Pro</title>
     <style>
-        body {
-            margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #121212; color: white; overflow-x: hidden;
-        }
-
-        /* Header with Wallet */
-        header {
-            background: #1f1f1f; padding: 10px 15px; display: flex;
-            justify-content: space-between; align-items: center;
-            border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100;
-        }
-        .logo { font-size: 20px; font-weight: bold; color: #ffcc00; }
-        .wallet-box {
-            background: #333; padding: 5px 12px; border-radius: 20px;
-            border: 1px solid #ffcc00; font-size: 14px; display: flex; align-items: center;
-        }
-
-        /* Moving Notification (Marquee) */
-        .notice-bar {
-            background: #2a2a2a; font-size: 12px; padding: 5px;
-            color: #ccc; border-bottom: 1px solid #333;
-        }
-
-        /* Sliding Banner */
-        .banner {
-            width: 92%; height: 160px; 
-            background: linear-gradient(135deg, #ffcc00 0%, #aa8800 100%);
-            margin: 15px auto; border-radius: 15px; display: flex;
-            flex-direction: column; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2); color: black;
-            text-align: center; font-weight: bold;
-        }
-
-        /* Grid */
-        .container {
-            padding: 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-            margin-bottom: 80px;
-        }
-        .card {
-            background: #1f1f1f; border-radius: 12px; padding: 25px 10px;
-            text-align: center; border: 1px solid #2d2d2d; cursor: pointer;
-            transition: 0.2s;
-        }
-        .card:active { transform: scale(0.9); background: #2d2d2d; }
-        .card-icon { font-size: 35px; margin-bottom: 8px; display: block; }
-
-        /* Buttons */
-        .btn-main {
-            background: #ffcc00; color: black; border: none; padding: 15px;
-            border-radius: 30px; font-weight: bold; width: 90%;
-            margin: 10px auto; display: block; text-align: center; cursor: pointer;
-            font-size: 16px;
-        }
-
-        /* Login/Register Popup */
-        .login-modal {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 80%;
-            background: #1f1f1f; border-radius: 30px 30px 0 0;
-            transition: 0.4s cubic-bezier(0, 0.5, 0.5, 1); z-index: 1001; 
-            padding: 25px; box-sizing: border-box;
-        }
-        .login-modal.active { bottom: 0; }
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); display: none; z-index: 1000;
-        }
-        .modal-overlay.show { display: block; }
+        :root { --red: #d91e1e; --grey: #f4f4f4; }
+        body { margin: 0; font-family: Arial; background: var(--grey); padding-bottom: 70px; }
         
-        .tab-buttons { display: flex; margin-bottom: 20px; border-bottom: 1px solid #333; }
-        .tab-btn { flex: 1; padding: 10px; text-align: center; cursor: pointer; color: #888; }
-        .tab-btn.active { color: #ffcc00; border-bottom: 2px solid #ffcc00; }
+        /* Header */
+        .header { background: white; padding: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px #ddd; }
+        .logo { color: var(--red); font-weight: bold; font-size: 20px; }
+        
+        /* WinGo Section */
+        .wingo-card { background: white; margin: 10px; border-radius: 15px; padding: 15px; text-align: center; border-top: 4px solid var(--red); }
+        .timer-box { display: flex; justify-content: space-around; align-items: center; background: #fff5f5; padding: 10px; border-radius: 10px; }
+        .timer { font-size: 24px; font-weight: bold; color: var(--red); }
+        
+        /* Betting Buttons */
+        .bet-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 15px 0; }
+        .btn { border: none; padding: 12px; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; }
+        .green { background: #28a745; } .violet { background: #6f42c1; } .red-btn { background: #dc3545; }
+        
+        .big-small { display: flex; gap: 10px; margin-top: 10px; }
+        .bs-btn { flex: 1; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .big { background: #ffc107; color: black; }
+        .small { background: #17a2b8; color: white; }
 
-        input {
-            width: 100%; padding: 15px; margin: 8px 0;
-            background: #121212; border: 1px solid #333; color: white;
-            border-radius: 10px; box-sizing: border-box; outline: none;
-        }
+        /* Number Grid */
+        .numbers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 15px; }
+        .num { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 50%; font-weight: bold; }
 
         /* Bottom Nav */
-        .bottom-nav {
-            position: fixed; bottom: 0; width: 100%; background: #1f1f1f;
-            display: flex; justify-content: space-around; padding: 10px 0;
-            border-top: 1px solid #333; z-index: 100;
-        }
-        .nav-item { font-size: 11px; color: #777; text-decoration: none; text-align: center; }
-        .nav-item.active { color: #ffcc00; }
+        .nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; }
+        .nav-item { font-size: 12px; color: #666; text-align: center; cursor: pointer; }
+        .active { color: var(--red); }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">INDORE 91</div>
-        <div class="wallet-box">
-            <span style="margin-right: 5px;">💰</span>
-            <span id="balance">₹0.00</span>
-        </div>
-    </header>
-
-    <div class="notice-bar">
-        <marquee>🔥 Member 98***21 just won ₹5,000 in Wingo! | 🚀 Register now for 100% Bonus!</marquee>
+    <div class="header">
+        <div class="logo">91 CLUB</div>
+        <div>🇮🇳 EN</div>
     </div>
 
-    <div class="banner">
-        <div style="font-size: 24px;">BIG WINNER</div>
-        <div style="font-size: 14px; opacity: 0.8;">DAILY JACKPOT UP TO ₹10,00,000</div>
+    <div style="background: var(--red); height: 120px; margin: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+        WELCOME BONUS 100%
     </div>
 
-    <div class="container">
-        <div class="card" onclick="playGame('Wingo')"><span class="card-icon">🎰</span>Wingo</div>
-        <div class="card" onclick="playGame('Aviator')"><span class="card-icon">🚀</span>Aviator</div>
-        <div class="card" onclick="playGame('Slots')"><span class="card-icon">🎡</span>Slots</div>
-        <div class="card" onclick="playGame('Casino')"><span class="card-icon">🃏</span>Casino</div>
-    </div>
-
-    <button class="btn-main" id="openLogin">LOGIN / REGISTER</button>
-
-    <div class="modal-overlay" id="overlay"></div>
-
-    <div class="login-modal" id="loginPopup">
-        <div style="text-align: right; color: #ffcc00; font-size: 24px;" id="closeLogin">✖</div>
-        
-        <div class="tab-buttons">
-            <div class="tab-btn active" id="loginTab">LOGIN</div>
-            <div class="tab-btn" id="regTab">REGISTER</div>
+    <div class="wingo-card">
+        <div class="timer-box">
+            <div>WinGo 1Min<br><small>Period: 2024032301</small></div>
+            <div class="timer" id="timer">00:45</div>
         </div>
 
-        <div id="loginForm">
-            <input type="text" placeholder="Phone Number">
-            <input type="password" placeholder="Password">
-            <button class="btn-main" onclick="success()">LOG IN</button>
+        <div class="bet-buttons">
+            <button class="btn green" onclick="bet('Green')">Green</button>
+            <button class="btn violet" onclick="bet('Violet')">Violet</button>
+            <button class="btn red-btn" onclick="bet('Red')">Red</button>
         </div>
 
-        <div id="regForm" style="display: none;">
-            <input type="text" placeholder="Mobile Number">
-            <input type="password" placeholder="Set Password">
-            <input type="text" placeholder="Invite Code (Optional)">
-            <button class="btn-main" onclick="success()">CREATE ACCOUNT</button>
+        <div class="numbers">
+            <div class="num" style="color:red">0</div><div class="num" style="color:green">1</div>
+            <div class="num" style="color:red">2</div><div class="num" style="color:green">3</div>
+            <div class="num" style="color:red">4</div><div class="num" style="color:green">5</div>
+            <div class="num" style="color:red">6</div><div class="num" style="color:green">7</div>
+            <div class="num" style="color:red">8</div><div class="num" style="color:green">9</div>
+        </div>
+
+        <div class="big-small">
+            <button class="bs-btn big" onclick="bet('Big')">BIG</button>
+            <button class="bs-btn small" onclick="bet('Small')">SMALL</button>
         </div>
     </div>
 
-    <div class="bottom-nav">
+    <div class="nav">
         <div class="nav-item active">🏠<br>Home</div>
         <div class="nav-item">📊<br>Activity</div>
-        <div class="nav-item">💎<br>Promotion</div>
+        <div class="nav-item" style="background:var(--red); color:white; width:40px; height:40px; border-radius:50%; line-height:40px;">💎</div>
         <div class="nav-item">💰<br>Wallet</div>
         <div class="nav-item">👤<br>Account</div>
     </div>
 
     <script>
-        const popup = document.getElementById('loginPopup');
-        const overlay = document.getElementById('overlay');
+        // Real-time Timer Logic
+        let time = 60;
+        setInterval(() => {
+            time--;
+            if(time < 0) time = 60;
+            let mins = Math.floor(time / 60);
+            let secs = time % 60;
+            document.getElementById('timer').innerHTML = 
+                `0${mins}:${secs < 10 ? '0'+secs : secs}`;
+        }, 1000);
 
-        // Toggle Login Popup
-        document.getElementById('openLogin').onclick = () => { popup.classList.add('active'); overlay.classList.add('show'); }
-        document.getElementById('closeLogin').onclick = () => { popup.classList.remove('active'); overlay.classList.remove('show'); }
-        overlay.onclick = () => { popup.classList.remove('active'); overlay.classList.remove('show'); }
-
-        // Switch Login/Register Tabs
-        document.getElementById('loginTab').onclick = function() {
-            this.classList.add('active'); document.getElementById('regTab').classList.remove('active');
-            document.getElementById('loginForm').style.display = 'block'; document.getElementById('regForm').style.display = 'none';
+        function bet(type) {
+            alert("Aapne " + type + " par bet lagayi hai!");
         }
-        document.getElementById('regTab').onclick = function() {
-            this.classList.add('active'); document.getElementById('loginTab').classList.remove('active');
-            document.getElementById('regForm').style.display = 'block'; document.getElementById('loginForm').style.display = 'none';
-        }
-
-        function success() { alert('Welcome! Processing...'); }
-        function playGame(name) { alert(name + ' game is starting...'); }
     </script>
 </body>
 </html>
