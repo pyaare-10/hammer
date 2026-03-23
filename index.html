@@ -2,91 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>91 CLUB - Professional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Indore 91 - Pro Gaming</title>
     <style>
-        :root { --main-red: #d91d1e; --bg-grey: #f7f8ff; }
-        body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg-grey); color: #333; padding-bottom: 80px; }
-        
-        /* Fixed Header */
-        .top-header { background: white; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .logo { font-size: 22px; font-weight: 900; color: var(--main-red); letter-spacing: -1px; }
-        .lang { font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        :root {
+            --indore-red: #fb3e3e;
+            --indore-gold: #ffc845;
+            --dark-bg: #222731;
+            --card-bg: #2b323d;
+            --grey-text: #8a94a6;
+        }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--dark-bg); color: white; overflow-x: hidden; padding-bottom: 80px; }
 
-        /* Wallet Section */
-        .wallet-card { background: white; margin: 15px; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .balance-label { font-size: 13px; color: #999; margin-bottom: 5px; }
-        .balance-amount { font-size: 28px; font-weight: bold; color: #333; display: flex; align-items: center; gap: 10px; }
-        .action-btns { display: flex; gap: 15px; margin-top: 15px; }
-        .act-btn { flex: 1; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .dep-btn { background: var(--main-red); color: white; }
-        .wit-btn { background: #fff; border: 1px solid #ddd; color: #666; }
+        /* Header (Dark) */
+        .top-nav { background: var(--dark-bg); padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4655; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--indore-gold); letter-spacing: 1px; }
+        .lang { font-size: 14px; font-weight: bold; }
 
-        /* WinGo Game Box */
-        .wingo-box { background: white; margin: 15px; border-radius: 20px; overflow: hidden; border-top: 5px solid var(--main-red); }
-        .wingo-header { background: #fff5f5; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .timer-display { font-size: 30px; font-weight: bold; color: var(--main-red); font-family: monospace; }
+        /* Wallet Box (Premium Look) */
+        .wallet-card { background: linear-gradient(135deg, #3a4452 0%, #222731 100%); margin: 15px; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #444; }
+        .balance-label { font-size: 13px; color: var(--grey-text); margin-bottom: 5px; }
+        .amount { font-size: 28px; font-weight: bold; color: var(--indore-gold); }
+        .action-btns { display: flex; gap: 12px; margin-top: 15px; }
+        .btn-act { flex: 1; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-dep { background: var(--indore-red); color: white; box-shadow: 0 4px 10px rgba(251,62,62,0.3); }
+        .btn-wit { background: #4a5568; color: white; }
+
+        /* Game Categories (Scrollable) */
+        .category-tabs { display: flex; overflow-x: auto; gap: 15px; padding: 10px 15px; background: #1e232b; scrollbar-width: none; }
+        .tab-item { text-align: center; min-width: 70px; font-size: 12px; color: #777; padding-bottom: 5px; cursor: pointer; }
+        .tab-item.active { color: var(--indore-gold); border-bottom: 2px solid var(--indore-gold); }
+
+        /* WinGo Banner Box */
+        .wingo-section { background: var(--card-bg); margin: 15px; border-radius: 15px; overflow: hidden; border: 1px solid #3d4655; }
+        .wingo-timer-bar { background: rgba(0,0,0,0.2); padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .time-left { font-size: 34px; font-weight: 900; color: var(--indore-red); letter-spacing: 2px; font-family: monospace; }
         
-        .bet-area { padding: 20px; text-align: center; }
+        /* Betting Area */
+        .bet-dashboard { padding: 15px; text-align: center; }
         .color-btns { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 20px; }
-        .c-btn { flex: 1; padding: 15px; border-radius: 8px; border: none; color: white; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .g-bg { background: #2ecc71; } .v-bg { background: #9b59b6; } .r-bg { background: #e74c3c; }
+        .c-btn { flex: 1; padding: 15px; border-radius: 8px; border: none; color: white; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .green-bg { background: #15b364; } .violet-bg { background: #a458f6; } .red-bg { background: #f53d3d; }
 
-        .num-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
-        .n-circle { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; cursor: pointer; background: white; transition: 0.2s; }
-        .n-circle:active { background: var(--main-red); color: white; }
+        .number-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+        .num-ball { width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; cursor: pointer; background: white; transition: 0.2s; color: black; }
+        .num-ball:active { background: var(--main-red); color: white; }
 
         .big-small-box { display: flex; gap: 15px; }
-        .bs-btn { flex: 1; padding: 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 18px; color: white; cursor: pointer; }
+        .bs-btn { flex: 1; padding: 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 18px; color: white; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
         .big-btn { background: #f39c12; }
         .small-btn { background: #3498db; }
 
-        /* Bottom Menu */
-        .footer-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; z-index: 1000; }
-        .f-item { text-align: center; font-size: 11px; color: #999; text-decoration: none; font-weight: bold; }
-        .f-item.active { color: var(--main-red); }
-        .f-center { background: var(--main-red); width: 55px; height: 55px; border-radius: 50%; margin-top: -35px; border: 5px solid var(--bg-grey); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 10px rgba(217,29,30,0.3); }
+        /* Game History Table */
+        .history-box { background: var(--card-bg); margin: 15px; border-radius: 15px; padding: 15px; border: 1px solid #3d4655; }
+        .history-header { display: grid; grid-template-columns: 2fr 1fr 1fr; color: #888; font-size: 12px; text-align: center; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #444; }
+        .history-row { display: grid; grid-template-columns: 2fr 1fr 1fr; text-align: center; padding: 10px 0; border-bottom: 1px solid #333; font-size: 14px; color: #ccc; }
+        .res-ball { width: 12px; height: 12px; display: inline-block; border-radius: 50%; }
 
-        marquee { background: #fffbe6; color: #d4a017; padding: 5px; font-size: 12px; font-weight: bold; }
+        /* Bottom Menu */
+        .footer-nav { position: fixed; bottom: 0; width: 100%; background: #222731; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #3d4655; z-index: 1000; }
+        .nav-link { color: #666; text-decoration: none; font-size: 11px; text-align: center; }
+        .nav-link.active { color: var(--indore-gold); }
+        .center-btn { width: 50px; height: 50px; background: var(--indore-red); border-radius: 50%; margin-top: -30px; border: 4px solid #222731; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 10px rgba(251,62,62,0.4); }
+
+        /* Scrolling Notice */
+        .marquee-box { background: #1e232b; color: #ffc845; padding: 5px; font-size: 12px; border-bottom: 1px solid #3d4655; }
     </style>
 </head>
 <body>
 
-    <div class="top-header">
-        <div class="logo">91 CLUB</div>
-        <div class="lang">🇮🇳 English</div>
+    <div class="top-nav">
+        <div class="logo">INDORE 91</div>
+        <div class="lang">🇮🇳 EN</div>
     </div>
 
-    <marquee>🔥 User 91***546 just won ₹45,600 on WinGo 1Min! 🚀 Register today and get ₹100 instant bonus!</marquee>
+    <div class="marquee-box">
+        <marquee>🔥 Member 98***621 just won ₹10,000 in Aviator! | 🚀 Register today for 100% Bonus!</marquee>
+    </div>
 
     <div class="wallet-card">
         <div class="balance-label">Total Balance</div>
-        <div class="balance-amount">₹ 5,420.00 <span style="font-size: 18px; cursor: pointer;">🔄</span></div>
+        <div class="amount">₹ 54,320.00 <span style="font-size: 18px; cursor: pointer; margin-left:10px;">🔄</span></div>
         <div class="action-btns">
-            <button class="act-btn dep-btn">➕ Deposit</button>
-            <button class="act-btn wit-btn">💳 Withdraw</button>
+            <button class="btn-act btn-dep">➕ Deposit</button>
+            <button class="btn-act btn-wit">💳 Withdraw</button>
         </div>
     </div>
 
-    <div class="wingo-box">
-        <div class="wingo-header">
-            <div><strong>WinGo 1Min</strong><br><small style="color:#999">Period: 2024032345</small></div>
-            <div class="timer-display" id="timer">00:45</div>
+    <div class="category-tabs">
+        <div class="tab-item active">WinGo</div>
+        <div class="tab-item">Mini Game</div>
+        <div class="tab-item">K3</div>
+        <div class="tab-item">5D</div>
+        <div class="tab-item">Slots</div>
+    </div>
+
+    <div class="wingo-section">
+        <div class="wingo-timer-bar">
+            <div><strong>WinGo 1Min</strong><br><small style="color:var(--grey-text)">Period: 2024032345</small></div>
+            <div class="time-left" id="timer">00:45</div>
         </div>
 
-        <div class="bet-area">
+        <div class="bet-dashboard">
             <div class="color-btns">
-                <button class="c-btn g-bg">Green</button>
-                <button class="c-btn v-bg">Violet</button>
-                <button class="c-btn r-bg">Red</button>
+                <button class="c-btn green-bg">Green</button>
+                <button class="c-btn violet-bg">Violet</button>
+                <button class="c-btn red-bg">Red</button>
             </div>
 
-            <div class="num-grid">
-                <div class="n-circle" style="color:#e74c3c">0</div><div class="n-circle" style="color:#2ecc71">1</div>
-                <div class="n-circle" style="color:#e74c3c">2</div><div class="n-circle" style="color:#2ecc71">3</div>
-                <div class="n-circle" style="color:#e74c3c">4</div><div class="n-circle" style="color:#2ecc71">5</div>
-                <div class="n-circle" style="color:#e74c3c">6</div><div class="n-circle" style="color:#2ecc71">7</div>
-                <div class="n-circle" style="color:#e74c3c">8</div><div class="n-circle" style="color:#2ecc71">9</div>
+            <div class="number-grid">
+                <div class="num-ball" style="color:#f53d3d">0</div><div class="num-ball" style="color:#15b364">1</div>
+                <div class="num-ball" style="color:#f53d3d">2</div><div class="num-ball" style="color:#15b364">3</div>
+                <div class="num-ball" style="color:#f53d3d">4</div><div class="num-ball" style="color:#15b364">5</div>
+                <div class="num-ball" style="color:#f53d3d">6</div><div class="num-ball" style="color:#15b364">7</div>
+                <div class="num-ball" style="color:#f53d3d">8</div><div class="num-ball" style="color:#15b364">9</div>
             </div>
 
             <div class="big-small-box">
@@ -96,26 +125,41 @@
         </div>
     </div>
 
+    <div class="history-box">
+        <div style="font-weight: bold; color: var(--indore-gold); margin-bottom: 10px; font-size: 16px;">Game History</div>
+        <div class="history-header">
+            <div>Period</div><div>Number</div><div>Result</div>
+        </div>
+        <div class="history-row">
+            <div>20240323044</div><div style="color: #f53d3d; font-weight: bold;">2</div>
+            <div><span class="res-ball" style="background: #f53d3d;"></span></div>
+        </div>
+        <div class="history-row">
+            <div>20240323043</div><div style="color: #15b364; font-weight: bold;">7</div>
+            <div><span class="res-ball" style="background: #15b364;"></span></div>
+        </div>
+        <div class="history-row">
+            <div>20240323042</div><div style="color: #a458f6; font-weight: bold;">5</div>
+            <div><span class="res-ball" style="background: linear-gradient(to right, #15b364 50%, #a458f6 50%);"></span></div>
+        </div>
+    </div>
+
     <div class="footer-nav">
-        <a href="#" class="f-item active">🏠<br>Home</a>
-        <a href="#" class="f-item">📊<br>Activity</a>
-        <div class="f-center">💎</div>
-        <a href="#" class="f-item">💰<br>Wallet</a>
-        <a href="#" class="f-item">👤<br>Account</a>
+        <a href="#" class="nav-link active">🏠<br>Home</a>
+        <a href="#" class="nav-link">📊<br>Activity</a>
+        <div class="center-btn">💎</div>
+        <a href="#" class="nav-link">💰<br>Wallet</a>
+        <a href="#" class="nav-link">👤<br>Account</a>
     </div>
 
     <script>
-        // Smooth Timer Logic
         let timeLeft = 60;
-        const timerEl = document.getElementById('timer');
         setInterval(() => {
             timeLeft--;
             if (timeLeft < 0) timeLeft = 60;
-            let m = Math.floor(timeLeft / 60);
             let s = timeLeft % 60;
-            timerEl.innerText = `0${m}:${s < 10 ? '0' + s : s}`;
+            document.getElementById('timer').innerText = `00:${s < 10 ? '0'+s : s}`;
         }, 1000);
     </script>
-
 </body>
 </html>
